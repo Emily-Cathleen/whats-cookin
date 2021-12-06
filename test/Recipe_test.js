@@ -1,5 +1,5 @@
 const Recipe = require("../src/classes/Recipe.js");
-const expect = chai.expect;
+const expect = require("chai").expect;
 
 describe("Recipe", () => {
   let recipe;
@@ -27,5 +27,8 @@ describe("Recipe", () => {
       "Eggs",
       ["breakfast", "dairy"]
     );
+  });
+  it("should be a function", () => {
+    expect(Recipe).to.be.a("function");
   });
 });
