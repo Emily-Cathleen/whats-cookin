@@ -4,11 +4,11 @@ const expect = require("chai").expect;
 
 describe("Ingredient", () => {
   let ingredient;
-  ingredient = new Ingredient;
   beforeEach(() => {
+    // ingredient = new Ingredient;
     ingredient = new Ingredient(20081, "wheat flour", 142);
   });
   it("should be a function", () => {
-    expect(Ingredent).to.be.a("function");
+    expect(Ingredient).to.be.a("function");
   });
 });
