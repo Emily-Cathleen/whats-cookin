@@ -10,6 +10,7 @@ let recipe2;
 let recipe3;
 
 beforeEach(() => {
+  cookbook = new Cookbook([recipe1, recipe2, recipe3]);
   recipe1 = new Recipe(
     456,
     "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -25,7 +26,7 @@ beforeEach(() => {
       },
     ],
     "Chocolate Cake",
-    ["dessert", "chocolate"]
+    ["dessert", "chocolate", "snack"]
   );
   recipe2 = new Recipe(
     789,
@@ -65,4 +66,18 @@ beforeEach(() => {
   it('Should be a function', () => {
     expect(Cookbook).to.be.a('function');
   });
-})
+
+  it("should be an instance of Cookbook", () => {
+    expect(cookbook).to.be.an.instanceOf(Cookbook)
+  });
+
+  it("should have recipes", () => {
+    expect(cookbook.recipes).to.deep.equal([recipe1, recipe2, recipe3])
+  });
+
+  it("should return a list of recipes corresponding to selected tags", () => {
+    expect(cookbook.filterTags()).to.deep.equal([recipe1, recipe3])
+  });
+
+
+});
