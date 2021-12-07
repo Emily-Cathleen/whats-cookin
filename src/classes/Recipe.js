@@ -1,4 +1,4 @@
-const Ingredient = require("../src/data/ingredients.js");
+const Ingredient = require('../data/ingredients.js');
 
 class Recipe {
   constructor(id, image, ingredients, instructions, name, tags) {

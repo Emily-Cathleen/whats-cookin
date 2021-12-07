@@ -6,7 +6,7 @@ class Ingredient {
   }
 }
 
-// module.exports = Ingredient;
+module.exports = Ingredient;
 
 /* This class is helping bridge the gap between
 our recipe class (and the ingredients passed in),
