@@ -1,4 +1,4 @@
-const Recipe = require('../data/recipes.js');
+const Recipe = require("../data/recipes.js");
 
 class Cookbook {
   constructor(recipes) {
@@ -6,30 +6,29 @@ class Cookbook {
 
     // One class to get you started!
   }
-  filterTags(selectedTag) {
-    const filteredRecipesByTag = this.recipes.filter(recipe => {
-      return recipe.tags.includes(selectedTag)
-})
-    return filteredRecipesByTag
+  filterTags(selectedTags) {
+    const filteredRecipesByTag = this.recipes.filter((recipe) => {
+      return selectedTags.every((selectedTag) =>
+        recipe.tags.includes(selectedTag)
+      );
+    });
+    return filteredRecipesByTag;
   }
-  // filteredIngredients(searchedIngredient) {
-  //   const filteredIngredient = this.recipes.filter(recipe => {
-  //     return recipe.ingredients.includes(searchedIngredient)
-  //   })
-  //     return filteredIngredient
-  //
-  // }
+  filteredIngredients(searchedIngredient) {
+    const filteredIngredient = this.recipes.filter((recipe) => {
+      return recipe.determineIngredients().includes(searchedIngredient);
+    });
+    return filteredIngredient;
+  }
   filteredName(searchedName) {
-    const filteredName = this.recipes.filter(recipe => {
-      return recipe.name.includes(searchedName)
-    })
-    return filteredName
-
+    const filteredName = this.recipes.filter((recipe) => {
+      return recipe.name.includes(searchedName);
+    });
+    return filteredName;
   }
 }
 
 export default Cookbook;
-
 
 /*
 It should have methods to determine:

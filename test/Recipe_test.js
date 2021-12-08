@@ -1,22 +1,30 @@
 const Recipe = require("../src/classes/Recipe.js");
+const Ingredient = require("../src/classes/Ingredient.js");
+
 const expect = require("chai").expect;
 
 describe("Recipe", () => {
   let recipe;
-  //   let id;
-  //   let image;
-  //   let ingredients;
-  //   let instructions;
-  //   let name;
-  //   let tags;
+  let ingredient1;
+  let ingredient2;
   beforeEach(() => {
+    ingredient1 = new Ingredient({
+      id: 20081,
+      name: "wheat flour",
+      estimatedCostInCents: 142,
+      quantity: { amount: 1.5, unit: "c" },
+    });
+    ingredient2 = new Ingredient({
+      id: 18372,
+      name: "bicarbonate of soda",
+      estimatedCostInCents: 582,
+      quantity: { amount: 0.5, unit: "tsp" },
+    });
+
     recipe = new Recipe(
       123,
       "https://spoonacular.com/recipeImages/595736-556x370.jpg",
-      [
-        { id: 20081, quantity: { amount: 1.5, unit: "c" } },
-        { id: 18372, quantity: { amount: 0.5, unit: "tsp" } },
-      ],
+      [ingredient1, ingredient2],
       [
         {
           instruction:
@@ -45,10 +53,7 @@ describe("Recipe", () => {
     );
   });
   it("should have some ingredients", () => {
-    expect(recipe.ingredients).to.deep.equal([
-      { id: 20081, quantity: { amount: 1.5, unit: "c" } },
-      { id: 18372, quantity: { amount: 0.5, unit: "tsp" } },
-    ]);
+    expect(recipe.ingredients).to.deep.equal([ingredient1, ingredient2]);
   });
   it("should have some instructions", () => {
     expect(recipe.instructions).to.deep.equal([
@@ -67,12 +72,21 @@ describe("Recipe", () => {
   });
   it("should be able to determine required ingredients", () => {
     expect(recipe.determineIngredients()).to.deep.equal([
-      { id: 20081, quantity: { amount: 1.5, unit: "c" } },
-      { id: 18372, quantity: { amount: 0.5, unit: "tsp" } },
+      "wheat flour",
+      "bicarbonate of soda",
     ]);
   });
 
-    it("should be able to get cost of ingredients", () => {
-      expect(recipe.getCostOfIngredients()).to.equal(504);
-    });
+  it("should be able to get cost of ingredients", () => {
+    expect(recipe.getCostOfIngredients()).to.equal(504);
+  });
+  it("should be able to return a recipe's instructions", () => {
+    expect(recipe.getInstructions()).to.deep.equal([
+      {
+        instruction:
+          "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
+        number: 1,
+      },
+    ]);
+  });
 });

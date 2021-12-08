@@ -6,11 +6,7 @@ class Ingredient {
     this.amount = ingredient.quantity.amount;
     this.unit = ingredient.quantity.unit;
   }
-  // pullIngredientDetails() {
-  //   //want a method for two sets of things
-  //   //id name and cents and costs
-  //   //and by unit
-  // }
+
   calculateCost() {
     return this.estimatedCostInCents * this.amount;
   }
