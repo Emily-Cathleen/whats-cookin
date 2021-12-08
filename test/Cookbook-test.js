@@ -48,7 +48,7 @@ beforeEach(() => {
     112,
     "https://spoonacular.com/recipeImages/595736-556x370.jpg",
     [
-      { id: 12908, quantity: { amount: 9, unit: "c" } },
+      { id: 22027, quantity: { amount: 1, unit: "c" }  },
       { id: 12145, quantity: { amount: 5, unit: "tbsp" } },
     ],
     [
@@ -58,7 +58,7 @@ beforeEach(() => {
         number: 4,
       },
     ],
-    "Bread",
+    "Banana Bread Cake",
     ["snack", "appetizer"]
   );
   cookbook = new Cookbook([recipe1, recipe2, recipe3]);
@@ -79,5 +79,12 @@ beforeEach(() => {
     expect(cookbook.filterTags("snack")).to.deep.equal([recipe1, recipe3])
   });
 
+  // it("should return a list of recipes corresponding to searched ingredient", () => {
+  //   expect(cookbook.filteredIngredients(22027)).to.deep.equal([recipe1, recipe3])
+  // });
 
+  it("should return a list of recipes corresponding to searched names", () => {
+  expect(cookbook.filteredName("Cake")).to.deep.equal([recipe1, recipe3])
+
+});
 });

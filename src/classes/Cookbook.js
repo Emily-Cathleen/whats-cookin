@@ -11,7 +11,13 @@ class Cookbook {
     })
     return filteredRecipesByTag
   }
-  filterNamesandIngredients() {
+  filteredIngredients() {
+
+  }
+  filteredName(searchedName) {
+    const filteredName = this.recipes.filter(recipe => { return recipe.name.includes(searchedName)
+    })
+    return filteredName
 
   }
 }
@@ -21,9 +27,6 @@ export default Cookbook;
 
 /*
 It should have methods to determine:
-TAGS ONLY: A filtered list of recipes based on one or more tags.
-//if on filtered drop down (ex we are the snacks on dropdown / we would want our filtered array of snacks)
-
 
 A filtered list of recipes based on its name or ingredients.
 //based on what is searched for in the search bar only
