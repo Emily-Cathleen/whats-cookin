@@ -13,11 +13,12 @@ class Recipe {
     return this.ingredients;
   }
   getCostOfIngredients() {
-    ingredient = new Ingredient;
-    const totalCost = ingredients.estimatedCostInCents * this.ingredients.quantity
-
-
-
+    const totalCost =  this.ingredients.reduce((acc, ingredient) => {
+      acc += ingredient.calculateCost()
+      return acc
+    }, 0)
+    return totalCost
+    // ingredients.estimatedCostInCents * this.ingredients.quantity
     //reduce?
     // this.ingredients.estimatedCostInCents * this.ingredients.quantity["amount"];
     // get cost of each ingredient (estimatedCostInCents * amount)

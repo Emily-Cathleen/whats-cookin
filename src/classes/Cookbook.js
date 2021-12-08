@@ -7,15 +7,21 @@ class Cookbook {
     // One class to get you started!
   }
   filterTags(selectedTag) {
-    const filteredRecipesByTag = this.recipes.filter(recipe => { return recipe.tags.includes(selectedTag)
-    })
+    const filteredRecipesByTag = this.recipes.filter(recipe => {
+      return recipe.tags.includes(selectedTag)
+})
     return filteredRecipesByTag
   }
-  filteredIngredients() {
-
-  }
+  // filteredIngredients(searchedIngredient) {
+  //   const filteredIngredient = this.recipes.filter(recipe => {
+  //     return recipe.ingredients.includes(searchedIngredient)
+  //   })
+  //     return filteredIngredient
+  //
+  // }
   filteredName(searchedName) {
-    const filteredName = this.recipes.filter(recipe => { return recipe.name.includes(searchedName)
+    const filteredName = this.recipes.filter(recipe => {
+      return recipe.name.includes(searchedName)
     })
     return filteredName
 

@@ -85,6 +85,5 @@ beforeEach(() => {
 
   it("should return a list of recipes corresponding to searched names", () => {
   expect(cookbook.filteredName("Cake")).to.deep.equal([recipe1, recipe3])
-
-});
+  });
 });
