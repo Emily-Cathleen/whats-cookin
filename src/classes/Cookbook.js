@@ -6,9 +6,10 @@ class Cookbook {
 
     // One class to get you started!
   }
-  filterTags() {
-    const filteredRecipesByTag = this.recipes.filter(recipe => { return this.recipes.tag === "snack"
+  filterTags(selectedTag) {
+    const filteredRecipesByTag = this.recipes.filter(recipe => { return recipe.tags.includes(selectedTag)
     })
+    return filteredRecipesByTag
   }
   filterNamesandIngredients() {
 

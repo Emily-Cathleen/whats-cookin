@@ -10,7 +10,6 @@ let recipe2;
 let recipe3;
 
 beforeEach(() => {
-  cookbook = new Cookbook([recipe1, recipe2, recipe3]);
   recipe1 = new Recipe(
     456,
     "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -62,6 +61,7 @@ beforeEach(() => {
     "Bread",
     ["snack", "appetizer"]
   );
+  cookbook = new Cookbook([recipe1, recipe2, recipe3]);
 });
   it('Should be a function', () => {
     expect(Cookbook).to.be.a('function');
@@ -76,7 +76,7 @@ beforeEach(() => {
   });
 
   it("should return a list of recipes corresponding to selected tags", () => {
-    expect(cookbook.filterTags()).to.deep.equal([recipe1, recipe3])
+    expect(cookbook.filterTags("snack")).to.deep.equal([recipe1, recipe3])
   });
 
 
