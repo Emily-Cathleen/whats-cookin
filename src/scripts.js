@@ -93,10 +93,15 @@ function showRecipeCard(selectedRecipe) {
       <ul>
       ${selectedRecipe.ingredients
         .map(({ name, amount, unit }) => {
-          return `<li>${name} ${amount} ${unit}</li>`;
+          return `<li>${amount} ${unit} ${name}</li>`;
         })
         .join("")}
       </ul>
+      </div>
+      <div>
+        <h3>Total Cost of Ingredients: $${(
+          selectedRecipe.getCostOfIngredients() / 100
+        ).toFixed(2)}</h3>
       </div>
       <div>
         <h1 class="">Recipe Instructions</h1>
