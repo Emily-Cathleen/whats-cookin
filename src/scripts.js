@@ -19,7 +19,6 @@ const searchBar = document.querySelector(".search-bar");
 const filterBar = document.querySelector(".filter-bar");
 const searchInput = document.querySelector("#searchInput");
 const searchButton = document.querySelector(".search-button");
-let cookbook = new Cookbook(recipes);
 
 /* Event Listeners */
 
@@ -29,7 +28,10 @@ homeButton.addEventListener("click", returnHome);
 
 function searchRecipes(event) {
   event.preventDefault();
-  let currentInput = searchInput.value;
+  let input = searchInput.value;
+  cookbook.filteredName(input);
+  console.log(searchInput.value);
+  console.log(cookbook);
 }
 
 searchButton.addEventListener("click", searchRecipes);
@@ -54,6 +56,7 @@ const recipes = recipeData.map(
   }
 );
 
+let cookbook = new Cookbook(recipes);
 // console.log(cookbook.filterTags(["snack"]));
 
 function addHidden(element) {
