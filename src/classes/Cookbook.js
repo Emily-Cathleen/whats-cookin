@@ -1,9 +1,6 @@
-const Recipe = require("../data/recipes.js");
-
 class Cookbook {
   constructor(recipes) {
     this.recipes = recipes;
-
   }
   filterTags(selectedTags) {
     const filteredRecipesByTag = this.recipes.filter((recipe) => {
