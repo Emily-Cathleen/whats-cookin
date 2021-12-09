@@ -39,6 +39,7 @@ function displayRecipeView() {
   addHidden(homePage);
   removeHidden(recipeView);
   removeHidden(homeButton);
+  showRecipeCard();
 }
 
 function populateRecipes() {
@@ -68,5 +69,20 @@ function populateRecipes() {
   });
 }
 populateRecipes();
+
+function showRecipeCard(recipeId) {
+  recipeView.innerHTML = `<div>
+      <img class="" id="" src="${recipeId.image}" alt="">
+      <button class="">Favorite Button</button>
+      <button class="">Add to Shopping Cart</button>
+    </div>
+    <section>
+      <div>
+        <h1 class="">Recipe Name</h1>
+      </div>
+      <div>
+        <h1 class="">Recipe Instructions</h1>
+      </div>`;
+}
 
 console.log("Hello world");
