@@ -6,11 +6,41 @@ import apiCalls from "./apiCalls";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 
+/* QUERY SELECTORS */
+
 const recipeTitle = document.querySelector("#openRecipe");
 const homePage = document.querySelector(".home-page");
 const recipeView = document.querySelector(".recipe-view");
 const homeButton = document.querySelector(".home-button");
+const savedRecipesButton = document.querySelector(".saved-recipes-button");
+const shoppingListButton = document.querySelector(".shopping-list-button");
 const recipeCard = document.querySelector(".recipe-card");
+const searchBar = document.querySelector(".search-bar");
+const filterBar = document.querySelector(".filter-bar");
+const searchInput = document.querySelector("#searchInput");
+const searchButton = document.querySelector(".search-button");
+let cookbook = new Cookbook(recipes);
+
+/* Event Listeners */
+
+homeButton.addEventListener("click", returnHome);
+
+// filterBar.addEventListener("keyup", filterRecipes);
+
+function searchRecipes(event) {
+  event.preventDefault();
+  let currentInput = searchInput.value;
+}
+
+searchButton.addEventListener("click", searchRecipes);
+
+// function filterRecipes(event) {
+//   let ;
+//   if (userInput.value !== "") {
+//     userInput = userInput.value;
+//   }
+//   console.log(userInput);
+// }
 
 const recipes = recipeData.map(
   ({ id, image, ingredients, instructions, name, tags }) => {
@@ -24,7 +54,6 @@ const recipes = recipeData.map(
   }
 );
 
-let cookbook = new Cookbook(recipes);
 // console.log(cookbook.filterTags(["snack"]));
 
 function addHidden(element) {
@@ -48,8 +77,6 @@ function returnHome() {
   addHidden(recipeView);
 }
 
-homeButton.addEventListener("click", returnHome);
-
 function populateRecipes() {
   homePage.innerHTML = cookbook.recipes
     .map((recipe) => {
@@ -62,7 +89,7 @@ function populateRecipes() {
         recipe.name
       }</h1>
         <div>
-          <button class="">Favorite Button</button>
+          <button class="${recipe.name}-fav-button">Favorite Button</button>
           <p>Tags: ${recipe.tags.join(", ")}</p>
         </div>
       </article>`;
