@@ -4,7 +4,6 @@ class Cookbook {
   constructor(recipes) {
     this.recipes = recipes;
 
-    // One class to get you started!
   }
   filterTags(selectedTags) {
     const filteredRecipesByTag = this.recipes.filter((recipe) => {
