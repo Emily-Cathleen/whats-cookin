@@ -1,9 +1,10 @@
 import './styles.css';
 import apiCalls from './apiCalls';
 
-const recipeTitles = document.querySelectorAll('#openRecipe');
+const recipeTitle = document.querySelector('#openRecipe');
 const homePage = document.querySelector('.home-page');
-const recipeView = document.querySelector('recipe-view');
+const recipeView = document.querySelector('.recipe-view');
+const homeButton = document.querySelector('.home-button');
 
 function addHidden(element) {
   element.classList.add('hidden');
@@ -17,26 +18,23 @@ function removeHidden(element) {
 function displayRecipeView() {
   addHidden(homePage);
   removeHidden(recipeView);
+  removeHidden(homeButton);
+
 };
 
 function makeTitlesClickable() {
-  recipeTitles.forEach(recipe, => {
-    recipe.addEventListener('click', () => {
-      console.log("clicked")
-    });
-  });
+
 };
 
 
-  // recipeTitles.forEach(recipe => {
-  //   recipe.addEventListener('click', function() {
-  //     console.log("clicked")
-  //   });
-  // )};
 
 
 
-// recipeTitles.addEventListener('click', displayRecipeView);
+
+recipeTitle.addEventListener('click', displayRecipeView);
+
+
+
 
 
 
