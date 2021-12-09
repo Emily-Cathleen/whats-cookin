@@ -1,6 +1,8 @@
 class Cookbook {
   constructor(recipes) {
     this.recipes = recipes;
+    this.matchingRecipes;
+    this.matchingTags = [];
   }
   filterTags(selectedTags) {
     const filteredRecipesByTag = this.recipes.filter((recipe) => {
@@ -17,18 +19,12 @@ class Cookbook {
     return filteredIngredient;
   }
   filteredName(searchedName) {
-    const filteredName = this.recipes.filter((recipe) => {
+    this.matchingRecipes = this.recipes.filter((recipe) => {
       return recipe.name.includes(searchedName);
     });
-    return filteredName;
   }
 }
 
 export default Cookbook;
 
-/*
-It should have methods to determine:
-
-A filtered list of recipes based on its name or ingredients.
-//based on what is searched for in the search bar only
-*/
+// Method to clear all matching arrays?
