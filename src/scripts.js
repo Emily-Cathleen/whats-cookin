@@ -35,11 +35,11 @@ function removeHidden(element) {
   element.classList.remove("hidden");
 }
 
-function displayRecipeView() {
+function displayRecipeView(selectedRecipe) {
   addHidden(homePage);
   removeHidden(recipeView);
   removeHidden(homeButton);
-  showRecipeCard();
+  showRecipeCard(selectedRecipe);
 }
 
 function populateRecipes() {
@@ -63,25 +63,28 @@ function populateRecipes() {
   document.querySelectorAll(".recipe-title").forEach((recipeTitle) => {
     recipeTitle.addEventListener("click", (event) => {
       const recipeId = parseInt(event.target.dataset.recipeId);
-      console.log(recipes.find(({ id }) => id === recipeId));
-      displayRecipeView();
+      const selectedRecipe = recipes.find(({ id }) => id === recipeId);
+      displayRecipeView(selectedRecipe);
     });
   });
 }
 populateRecipes();
 
-function showRecipeCard(recipeId) {
+function showRecipeCard(selectedRecipe) {
   recipeView.innerHTML = `<div>
-      <img class="" id="" src="${recipeId.image}" alt="">
+      <img class="" id="" src="${selectedRecipe.image}" alt="">
       <button class="">Favorite Button</button>
       <button class="">Add to Shopping Cart</button>
     </div>
     <section>
       <div>
-        <h1 class="">Recipe Name</h1>
+        <h1 class="">${selectedRecipe.name}</h1>
       </div>
       <div>
         <h1 class="">Recipe Instructions</h1>
+        <p>${selectedRecipe.instructions.map((instruction) => {
+          return "";
+        })}
       </div>`;
 }
 
