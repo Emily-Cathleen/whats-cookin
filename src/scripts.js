@@ -42,6 +42,14 @@ function displayRecipeView(selectedRecipe) {
   showRecipeCard(selectedRecipe);
 }
 
+function returnHome() {
+  addHidden(homeButton);
+  removeHidden(homePage);
+  addHidden(recipeView);
+}
+
+homeButton.addEventListener("click", returnHome);
+
 function populateRecipes() {
   homePage.innerHTML = cookbook.recipes
     .map((recipe) => {
@@ -81,10 +89,22 @@ function showRecipeCard(selectedRecipe) {
         <h1 class="">${selectedRecipe.name}</h1>
       </div>
       <div>
+      <h1 class="">Ingredients</h1>
+      <ul>
+      ${selectedRecipe.ingredients
+        .map(({ name, amount, unit }) => {
+          return `<li>${name} ${amount} ${unit}</li>`;
+        })
+        .join("")}
+      </ul>
+      </div>
+      <div>
         <h1 class="">Recipe Instructions</h1>
-        <p>${selectedRecipe.instructions.map((instruction) => {
-          return "";
-        })}
+        ${selectedRecipe.instructions
+          .map(({ number, instruction }) => {
+            return `<p>${number}. ${instruction}</p>`;
+          })
+          .join("")}
       </div>`;
 }
 
