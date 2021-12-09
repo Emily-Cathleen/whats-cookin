@@ -1,7 +1,8 @@
 body {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  background-color: rgb(255 210 170 / 80%);
+  background-color: tan;
 }
 
 html {
@@ -9,11 +10,68 @@ html {
   width: 100%;
 }
 
+/* ~~~~~ Nav Bar ~~~~~ */
+
 .nav-bar {
   display: flex;
-  flex-direction: row;
-  
+  flex-direction: column;
+  border: 2px solid blue;
 }
+
+.search-bar {
+  display: flex;
+  width: 20%;
+  margin: 10px 10px 10px 10px;
+}
+
+.nav-bar-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.saved-recipes-button,
+.shopping-list-button,
+.home-button {
+  display: flex;
+  width: 20%;
+  margin: 10px 10px 10px 10px;
+}
+
+.filter-bar {
+  display: flex;
+  width: 20%;
+  margin: 10px 10px 10px 10px;
+}
+
+.home-page {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.recipe-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 2px solid blue;
+}
+
+.recipe-title:hover, {
+  cursor: pointer;
+  /* cursor: url(https://cur.cursors-4u.net/games/gam-13/gam1282.cur), auto !important; */
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
