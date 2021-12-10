@@ -2,7 +2,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  /* background: url(https://images.pexels.com/photos/566888/pexels-photo-566888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1); */
   background-color: tan;
+
 }
 
 html {
@@ -31,7 +33,14 @@ html {
 
 .saved-recipes-button,
 .shopping-list-button,
-.home-button {
+.home-button
+{
+  display: flex;
+  width: 20%;
+  margin: 10px 10px 10px 10px;
+}
+
+.search-button  {
   display: flex;
   width: 20%;
   margin: 10px 10px 10px 10px;
