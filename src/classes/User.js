@@ -7,10 +7,18 @@ class User {
   constructor(userData) {
     this.name = userData.name;
     this.id = userData.id;
-    this.pantry = userData.pantry
+    this.pantry = userData.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
     this.filteredByName = [];
+  }
+
+  addFavoriteRecipe(recipe) {
+    this.favoriteRecipes.push(recipe);
+  }
+
+  addRecipesToCook(recipe) {
+    this.recipesToCook.push(recipe);
   }
 };
 
