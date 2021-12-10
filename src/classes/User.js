@@ -29,8 +29,6 @@ class User {
     this.recipesToCook.splice(this.recipesToCook.indexOf(recipe), 1);
   }
 
-
-
 };
 
 module.exports = User;
