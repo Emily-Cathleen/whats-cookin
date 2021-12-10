@@ -3,7 +3,7 @@ body {
   flex-direction: column;
   justify-content: center;
   /* background: url(https://images.pexels.com/photos/566888/pexels-photo-566888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1); */
-  background-color: tan;
+  background-color: lightsteelblue;
 
 }
 
@@ -46,10 +46,14 @@ html {
   margin: 10px 10px 10px 10px;
 }
 
-.filter-bar {
+/* .filter-bar {
   display: flex;
   width: 20%;
   margin: 10px 10px 10px 10px;
+} */
+
+.filter-dropdown {
+  border: 2px solid pink;
 }
 
 .home-page {
