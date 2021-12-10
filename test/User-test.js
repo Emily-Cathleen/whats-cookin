@@ -106,6 +106,20 @@ describe("User", () => {
     it("should be able to add a recipe to recipes to cook", () => {
       user.addRecipesToCook(recipe1);
       expect(user.recipesToCook).to.deep.equal([recipe1])
-    })
+    });
+
+    it("should be able to remove a recipe from favorites", () => {
+      user.addFavoriteRecipe(recipe1);
+      user.addFavoriteRecipe(recipe2);
+      user.removeRecipeFromFavorites(recipe1);
+      expect(user.favoriteRecipes).to.deep.equal([recipe2])
+    });
+
+    it("should be able to remove a recipe from recipes from cook list", () => {
+      user.addRecipesToCook(recipe1);
+      user.addRecipesToCook(recipe2);
+      user.removeRecipesToBeCooked(recipe1);
+      expect(user.recipesToCook).to.deep.equal([recipe2])
+    });
 
 });

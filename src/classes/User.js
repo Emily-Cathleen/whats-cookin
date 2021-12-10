@@ -20,6 +20,17 @@ class User {
   addRecipesToCook(recipe) {
     this.recipesToCook.push(recipe);
   }
+
+  removeRecipeFromFavorites(recipe) {
+    this.favoriteRecipes.splice(this.favoriteRecipes.indexOf(recipe), 1);
+  }
+
+  removeRecipesToBeCooked(recipe) {
+    this.recipesToCook.splice(this.recipesToCook.indexOf(recipe), 1);
+  }
+
+
+
 };
 
 module.exports = User;
@@ -30,5 +41,7 @@ module.exports = User;
 //
 // Allow a user to favorite or unfavorite recipes (add to / remove from the user’s favoriteRecipes)
 // Decide to cook a recipe that week (add to my recipesToCook)
+
+
 // Filter my favoriteRecipes by one or more tags.
 // Filter my favoriteRecipes by its name or ingredients.
