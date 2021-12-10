@@ -7,8 +7,6 @@ const User = require("../src/classes/User.js");
 describe("User", () => {
   let user;
 
-
-
     beforeEach(() => {
     user = new User({
         name: "Saige O'Kon",
@@ -38,4 +36,14 @@ describe("User", () => {
     it("should have an id", () => {
       expect(user.id).to.equal(1)
     });
+
+    it("should have a pantry", () => {
+      expect(user.pantry).to.deep.equal([
+      {ingredient: 11297,
+      amount: 4},
+      {ingredient: 1082047,
+      amount: 10},
+      {ingredient: 20081,
+      amount: 5}])
+    })
 });
