@@ -2,8 +2,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* background: url(https://images.pexels.com/photos/566888/pexels-photo-566888.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1); */
-  background-color: lightsteelblue;
+  background: url(https://images.pexels.com/photos/765062/pexels-photo-765062.jpeg?cs=srgb&dl=pexels-yigithan-bal-765062.jpg&fm=jpg);
+  /* background-color: lightsteelblue; */
 
 }
 
