@@ -1,3 +1,8 @@
+import Cookbook from "../src/classes/Cookbook";
+const Recipe = require("../src/classes/Recipe.js");
+const Ingredient = require("../src/classes/Ingredient.js");
+const User = require("../src/classes/User.js");
+
 class User {
   constructor(user) {
     this.user = user;
@@ -6,8 +11,16 @@ class User {
     this.favoriteRecipes = [];
     //or should it just be this.favoriteRecipes = favoriteRecipes;
   }
-}
 
+  filterFavoriteTags(selectedTags) {
+    const filteredRecipesByTag = this.favoriteRecipes.filter((recipe) => {
+      return selectedTags.every((selectedTag) =>
+        recipe.tags.includes(selectedTag)
+      );
+    });
+    return filteredRecipesByTag;
+  }
+};
 module.exports = User;
 
 // Iteration 2 - Users
