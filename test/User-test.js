@@ -4,16 +4,13 @@ import { expect } from "chai";
 // const Ingredient = require("../src/classes/Ingredient.js");
 const User = require("../src/classes/User.js");
 
-
-
-
 describe("User", () => {
-  let user;
+  let user1;
   let user2;
   let user3;
 
     beforeEach(() => {
-    user = new User({
+    user1 = new User({
         name: "Saige O'Kon",
         id: 1,
         pantry: [
@@ -52,6 +49,6 @@ describe("User", () => {
     });
 
     it("should be an instance of User", () => {
-      expect(user).to.be.an.instanceOf(User);
+      expect(user1).to.be.an.instanceOf(User);
     });
 });
