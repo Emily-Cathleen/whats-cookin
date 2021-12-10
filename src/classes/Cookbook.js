@@ -22,6 +22,7 @@ class Cookbook {
     this.matchingRecipes = this.recipes.filter((recipe) => {
       return recipe.name.includes(searchedName);
     });
+    return this.matchingRecipes;
   }
 }
 
