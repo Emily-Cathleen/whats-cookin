@@ -35,3 +35,4 @@ class Cookbook {
 export default Cookbook;
 
 // Method to clear all matching arrays?
+// Fix tests to use "filteredRecipes" instead of individual methods for name and ingredient.

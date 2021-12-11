@@ -20,6 +20,7 @@ const recipeCard = document.querySelector(".recipe-card");
 const filterBar = document.querySelector(".filter-bar");
 const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
+const tagsDropDown = document.querySelector("#tags");
 
 /* Event Listeners */
 
@@ -27,8 +28,7 @@ homeButton.addEventListener("click", returnHome);
 
 // filterBar.addEventListener("keyup", filterRecipes);
 
-function searchRecipes(event) {
-  event.preventDefault();
+function searchRecipes() {
   const nameInput = nameSearchInput.value;
   const ingredientInput = ingredientSearchInput.value;
   populateRecipes(cookbook.filteredRecipes(ingredientInput, nameInput));
@@ -36,6 +36,19 @@ function searchRecipes(event) {
 
 nameSearchInput.addEventListener("input", searchRecipes);
 ingredientSearchInput.addEventListener("input", searchRecipes);
+
+function filterByTags() {
+  const tagInput = tagsDropDown.value;
+  if (tagInput === "none") {
+    populateRecipes(cookbook.recipes);
+    return;
+  }
+  populateRecipes(
+    cookbook.filterTags(tagInput.split(",").map((tag) => tag.trim()))
+  );
+}
+
+tagsDropDown.addEventListener("change", filterByTags);
 
 const recipes = recipeData.map(
   ({ id, image, ingredients, instructions, name, tags }) => {
