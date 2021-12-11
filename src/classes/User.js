@@ -10,25 +10,25 @@ class User {
     this.pantry = userData.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-    this.filteredByName = [];
-  }
+  };
 
   addFavoriteRecipe(recipe) {
-    this.favoriteRecipes.push(recipe);
-  }
+    if (!this.favoriteRecipes.includes(recipe)){
+      this.favoriteRecipes.push(recipe);
+    };
+  };
 
   addRecipesToCook(recipe) {
     this.recipesToCook.push(recipe);
-  }
+  };
 
   removeRecipeFromFavorites(recipe) {
     this.favoriteRecipes.splice(this.favoriteRecipes.indexOf(recipe), 1);
-  }
+  };
 
   removeRecipesToBeCooked(recipe) {
     this.recipesToCook.splice(this.recipesToCook.indexOf(recipe), 1);
-  }
-
+  };
 };
 
 module.exports = User;
