@@ -1,12 +1,12 @@
 import "./styles.css";
 import { recipeData } from "./data/recipes.js";
 import { ingredientsData } from "./data/ingredients.js";
-import { userData } from "./data/users.js"
+import { userData } from "./data/users.js";
 import Ingredient from "./classes/Ingredient.js";
 import apiCalls from "./apiCalls";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
-import User from "./classes/User.js"
+import User from "./classes/User.js";
 
 /* QUERY SELECTORS */
 
@@ -17,10 +17,9 @@ const homeButton = document.querySelector(".home-button");
 const savedRecipesButton = document.querySelector(".saved-recipes-button");
 const shoppingListButton = document.querySelector(".shopping-list-button");
 const recipeCard = document.querySelector(".recipe-card");
-const searchBar = document.querySelector(".search-bar");
 const filterBar = document.querySelector(".filter-bar");
-const searchInput = document.querySelector("#searchInput");
-const searchButton = document.querySelector(".search-button");
+const nameSearchInput = document.querySelector("#nameSearchInput");
+const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 
 /* Event Listeners */
 
@@ -30,15 +29,13 @@ homeButton.addEventListener("click", returnHome);
 
 function searchRecipes(event) {
   event.preventDefault();
-  let input = searchInput.value;
-  cookbook.filteredName(input);
-  console.log(searchInput.value);
-  console.log(cookbook);
+  const nameInput = nameSearchInput.value;
+  const ingredientInput = ingredientSearchInput.value;
+  populateRecipes(cookbook.filteredRecipes(ingredientInput, nameInput));
 }
 
-searchButton.addEventListener("click", searchRecipes);
-
-
+nameSearchInput.addEventListener("input", searchRecipes);
+ingredientSearchInput.addEventListener("input", searchRecipes);
 
 const recipes = recipeData.map(
   ({ id, image, ingredients, instructions, name, tags }) => {
@@ -76,8 +73,8 @@ function returnHome() {
   addHidden(recipeView);
 }
 
-function populateRecipes() {
-  homePage.innerHTML = cookbook.recipes
+function populateRecipes(recipes) {
+  homePage.innerHTML = recipes
     .map((recipe) => {
       return `
     <article class="recipe-card">
@@ -102,7 +99,7 @@ function populateRecipes() {
     });
   });
 }
-populateRecipes();
+populateRecipes(cookbook.recipes);
 
 function showRecipeCard(selectedRecipe) {
   recipeView.innerHTML = `<div>
