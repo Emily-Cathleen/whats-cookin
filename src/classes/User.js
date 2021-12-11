@@ -10,28 +10,53 @@ class User {
     this.pantry = userData.pantry;
     this.favoriteRecipes = [];
     this.recipesToCook = [];
-  };
+  }
 
   addFavoriteRecipe(recipe) {
-    if (!this.favoriteRecipes.includes(recipe)){
+    if (!this.favoriteRecipes.includes(recipe)) {
       this.favoriteRecipes.push(recipe);
-    };
-  };
+    }
+  }
 
   addRecipesToCook(recipe) {
     if (!this.recipesToCook.includes(recipe)) {
       this.recipesToCook.push(recipe);
-    };
-  };
+    }
+  }
 
   removeRecipeFromFavorites(recipe) {
     this.favoriteRecipes.splice(this.favoriteRecipes.indexOf(recipe), 1);
-  };
+  }
 
   removeRecipesToBeCooked(recipe) {
     this.recipesToCook.splice(this.recipesToCook.indexOf(recipe), 1);
-  };
-};
+  }
+
+  filterTags(tags) {
+    return this.favoriteRecipes.filter((recipe) => {
+      return tags.every((tag) => recipe.tags.includes(tag));
+    });
+  }
+
+  filterByNameAndIngredient(searchedName, searchedIngredient) {
+    const filteredIngredient = this.favoriteRecipes.filter((recipe) => {
+      // We want to see if the searched ingredient is a substring of some
+      // ingredient and the searched name is a substring of the recipe name.
+      return (
+        (searchedIngredient == "" ||
+          recipe
+            .determineIngredients()
+            .some((ingredient) =>
+              ingredient
+                .toLowerCase()
+                .includes(searchedIngredient.toLowerCase())
+            )) &&
+        recipe.searchedName.toLowerCase().includes(searchedName.toLowerCase())
+      );
+    });
+    return filteredIngredient;
+  }
+}
 
 module.exports = User;
 
@@ -41,7 +66,6 @@ module.exports = User;
 //
 // Allow a user to favorite or unfavorite recipes (add to / remove from the user’s favoriteRecipes)
 // Decide to cook a recipe that week (add to my recipesToCook)
-
 
 // Filter my favoriteRecipes by one or more tags.
 // Filter my favoriteRecipes by its name or ingredients.

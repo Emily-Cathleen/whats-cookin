@@ -12,20 +12,27 @@ class Cookbook {
     });
     return filteredRecipesByTag;
   }
-  filteredIngredients(searchedIngredient) {
+  filteredRecipes(searchedIngredient, searchedName) {
     const filteredIngredient = this.recipes.filter((recipe) => {
-      return recipe.determineIngredients().includes(searchedIngredient);
+      // We want to see if the searched ingredient is a substring of some
+      // ingredient and the searched name is a substring of the recipe name.
+      return (
+        (searchedIngredient == "" ||
+          recipe
+            .determineIngredients()
+            .some((ingredient) =>
+              ingredient
+                .toLowerCase()
+                .includes(searchedIngredient.toLowerCase())
+            )) &&
+        recipe.name.toLowerCase().includes(searchedName.toLowerCase())
+      );
     });
     return filteredIngredient;
-  }
-  filteredName(searchedName) {
-    this.matchingRecipes = this.recipes.filter((recipe) => {
-      return recipe.name.includes(searchedName);
-    });
-    return this.matchingRecipes;
   }
 }
 
 export default Cookbook;
 
 // Method to clear all matching arrays?
+// Fix tests to use "filteredRecipes" instead of individual methods for name and ingredient.
