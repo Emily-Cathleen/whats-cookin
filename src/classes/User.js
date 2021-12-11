@@ -19,7 +19,9 @@ class User {
   };
 
   addRecipesToCook(recipe) {
-    this.recipesToCook.push(recipe);
+    if (!this.recipesToCook.includes(recipe)) {
+      this.recipesToCook.push(recipe);
+    };
   };
 
   removeRecipeFromFavorites(recipe) {
