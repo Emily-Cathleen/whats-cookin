@@ -98,14 +98,9 @@ describe("Cookbook", () => {
     ]);
   });
 
-  it("should return a list of recipes corresponding to searched ingredient", () => {
-    expect(cookbook.filteredIngredients("dried cranberries")).to.deep.equal([
-      recipe2,
-      recipe3,
-    ]);
-  });
-
-  it("should return a list of recipes corresponding to searched names", () => {
-    expect(cookbook.filteredName("Cake")).to.deep.equal([recipe1, recipe3]);
+  it("should return a list of recipes corresponding to searched ingredient and name", () => {
+    expect(
+      cookbook.filteredRecipes("dried cranberries", "banana")
+    ).to.deep.equal([recipe3]);
   });
 });
