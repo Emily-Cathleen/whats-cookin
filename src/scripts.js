@@ -38,13 +38,7 @@ function searchRecipes(event) {
 
 searchButton.addEventListener("click", searchRecipes);
 
-// function filterRecipes(event) {
-//   let ;
-//   if (userInput.value !== "") {
-//     userInput = userInput.value;
-//   }
-//   console.log(userInput);
-// }
+
 
 const recipes = recipeData.map(
   ({ id, image, ingredients, instructions, name, tags }) => {
