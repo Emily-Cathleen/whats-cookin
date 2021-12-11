@@ -105,14 +105,15 @@ function populateRecipes() {
 populateRecipes();
 
 function showRecipeCard(selectedRecipe) {
-  recipeView.innerHTML = `<div>
-      <img class="" id="" src="${selectedRecipe.image}" alt="">
-      <button class="">Favorite Button</button>
-      <button class="">Add to Shopping Cart</button>
+  recipeView.innerHTML = `
+    <div>
+      <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="">
+      <button class="favorite-button">Favorite</button>
+      <button class="add-to-cart-button">Add to Cart</button>
     </div>
-    <section>
+    <section class="recipe-info">
       <div>
-        <h1 class="">${selectedRecipe.name}</h1>
+        <h1 class="recipe-title">${selectedRecipe.name}</h1>
       </div>
       <div>
       <h1 class="">Ingredients</h1>
@@ -136,7 +137,8 @@ function showRecipeCard(selectedRecipe) {
             return `<p>${number}. ${instruction}</p>`;
           })
           .join("")}
-      </div>`;
-}
+      </div>;
+    </section>`;
+};
 
 console.log("Hello world");
