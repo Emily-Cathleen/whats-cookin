@@ -25,9 +25,9 @@ const tagsDropDown = document.querySelector("#tags");
 /* Event Listeners */
 
 homeButton.addEventListener("click", returnHome);
+tagsDropDown.addEventListener("change", filterByTags);
 
-// filterBar.addEventListener("keyup", filterRecipes);
-
+//search recipe function calls the populateRecipes function using input variables from both search bars
 function searchRecipes() {
   const nameInput = nameSearchInput.value;
   const ingredientInput = ingredientSearchInput.value;
@@ -44,11 +44,10 @@ function filterByTags() {
     return;
   }
   populateRecipes(
+    //written this way in case we want to try multiple tags at once in future. Should still work with dropdown
     cookbook.filterTags(tagInput.split(",").map((tag) => tag.trim()))
   );
 }
-
-tagsDropDown.addEventListener("change", filterByTags);
 
 const recipes = recipeData.map(
   ({ id, image, ingredients, instructions, name, tags }) => {

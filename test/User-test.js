@@ -124,18 +124,18 @@ describe("User", () => {
     expect(user.filterTags(["dessert", "snack"])).to.deep.equal([recipe1]);
   });
 
-  it("should be able to filter favorite recipes by ingredient name", () => {
-    user.addFavoriteRecipe(recipe1);
-    user.addFavoriteRecipe(recipe2);
-    expect(
-      user.filterByNameAndIngredient("steak", "wheat flour")
-    ).to.deep.equal([recipe2]);
-  });
-  it("should be able to filter favorite recipes by name", () => {
-    user.addFavoriteRecipe(recipe1);
-    user.addFavoriteRecipe(recipe2);
-    expect(
-      user.filterByNameAndIngredient("steak", "wheat flour")
-    ).to.deep.equal([recipe2]);
-  });
+  // it("should be able to filter favorite recipes by ingredient name", () => {
+  //   user.addFavoriteRecipe(recipe1);
+  //   user.addFavoriteRecipe(recipe2);
+  //   expect(
+  //     user.filterByNameAndIngredient("steak", "wheat flour")
+  //   ).to.deep.equal([recipe2]);
+  // });
+  // it("should be able to filter favorite recipes by name", () => {
+  //   user.addFavoriteRecipe(recipe1);
+  //   user.addFavoriteRecipe(recipe2);
+  //   expect(
+  //     user.filterByNameAndIngredient("steak", "wheat flour")
+  //   ).to.deep.equal([recipe2]);
+  // });
 });
