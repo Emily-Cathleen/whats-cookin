@@ -1,10 +1,12 @@
 import "./styles.css";
 import { recipeData } from "./data/recipes.js";
 import { ingredientsData } from "./data/ingredients.js";
+import { userData } from "./data/users.js"
 import Ingredient from "./classes/Ingredient.js";
 import apiCalls from "./apiCalls";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
+import User from "./classes/User.js"
 
 /* QUERY SELECTORS */
 
