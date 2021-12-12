@@ -27,6 +27,7 @@ const favoriteButtons = document.querySelectorAll(".favorite-button");
 const recipesToCookPage = document.querySelector(".recipes-to-cook-page");
 const userName = document.querySelector(".user-name");
 
+/* GLOBAL VARIABLES */
 const hidableElements = [
   homePage,
   recipeView,
@@ -36,24 +37,18 @@ const hidableElements = [
   recipesToCookPage,
   recipesToCookButton,
 ];
+let user;
+let ingredients;
+let recipes;
+let cookbook;
 
+/* FUNCTIONS */
 function displayElements(elementsToDisplay) {
   elementsToDisplay.forEach(removeHidden);
   hidableElements
     .filter((element) => !elementsToDisplay.includes(element))
     .forEach(addHidden);
 }
-
-let user;
-let ingredients;
-let recipes;
-let cookbook;
-
-/* Event Listeners */
-window.addEventListener("load", loadAPIs);
-homeButton.addEventListener("click", returnHome);
-tagsDropDown.addEventListener("change", filterByTags);
-recipesToCookButton.addEventListener("click", showRecipesToCookPage);
 
 async function loadAPIs() {
   let usersData = await fetchUsers();
@@ -120,9 +115,6 @@ function searchRecipes() {
   renderRecipePages();
 }
 
-nameSearchInput.addEventListener("input", searchRecipes);
-ingredientSearchInput.addEventListener("input", searchRecipes);
-
 function filterByTags() {
   nameSearchInput.value = "";
   ingredientSearchInput.value = "";
@@ -177,7 +169,7 @@ function populateRecipes(element, getRecipes) {
   element.querySelectorAll(".recipe-title").forEach((recipeTitle) => {
     recipeTitle.addEventListener("click", (event) => {
       const recipeId = parseInt(event.target.dataset.recipeId);
-      console.log(event.target);
+
       const selectedRecipe = recipes.find(({ id }) => id === recipeId);
       if (selectedRecipe) {
         displayRecipeView(selectedRecipe);
@@ -191,12 +183,11 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
-//
 
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
-  console.log(selectedRecipe);
+
   recipeView.innerHTML = `
     <div>
       <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
@@ -267,9 +258,7 @@ function showRecipesToCookPage() {
 
 function clickFavoriteButton(recipe) {
   return () => {
-    console.log("clicked");
     const isFavorite = user.favoriteRecipes.includes(recipe);
-    console.log(isFavorite);
     if (isFavorite) {
       user.removeRecipeFromFavorites(recipe);
     } else {
@@ -279,4 +268,11 @@ function clickFavoriteButton(recipe) {
   };
 }
 
+/* Event Listeners */
+window.addEventListener("load", loadAPIs);
+homeButton.addEventListener("click", returnHome);
+tagsDropDown.addEventListener("change", filterByTags);
+recipesToCookButton.addEventListener("click", showRecipesToCookPage);
 favoriteRecipesPageButton.addEventListener("click", showFavoritesPage);
+nameSearchInput.addEventListener("input", searchRecipes);
+ingredientSearchInput.addEventListener("input", searchRecipes);
