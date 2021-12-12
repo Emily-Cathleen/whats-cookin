@@ -22,6 +22,7 @@ const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
+const favoriteButtons = document.querySelectorAll(".favorite-button");
 const user = new User("Franny", 2,
         [{
           "ingredient": 11297,
@@ -173,9 +174,9 @@ function showFavoritesPage() {
 
 function clickFavoriteButton(recipe) {
   user.addFavoriteRecipe(recipe);
-
+//forEach over all of the recipes in the
 };
 
 
 
-favoriteRecipesPageButton.addEventListener('click', showFavoritesPage)
+favoriteRecipesPageButton.addEventListener('click', showFavoritesPage);
