@@ -7,7 +7,6 @@ describe("Recipe", () => {
   let recipe;
   let ingredient1;
   let ingredient2;
-  let ingredient3;
   beforeEach(() => {
     ingredient1 = new Ingredient({
       id: 20081,
@@ -54,7 +53,7 @@ describe("Recipe", () => {
         },
       ],
       "Eggs",
-      ["breakfast", "dairy"]
+      []
     );
   });
   it("should be a function", () => {
@@ -67,7 +66,6 @@ describe("Recipe", () => {
 
   it("should have an id", () => {
     expect(recipe.id).to.equal(123);
-    expect(recipe.id).to.equal(undefined);
 
 
   });
@@ -90,9 +88,12 @@ describe("Recipe", () => {
   });
   it("should have a name", () => {
     expect(recipe.name).to.equal("Eggs");
+  
   });
   it("should have tags", () => {
     expect(recipe.tags).to.deep.equal(["breakfast", "dairy"]);
+    expect(recipe2.tags).to.deep.equal([]);
+
   });
   it("should be able to determine required ingredients", () => {
     expect(recipe.determineIngredients()).to.deep.equal([
@@ -103,6 +104,7 @@ describe("Recipe", () => {
 
   it("should be able to get cost of ingredients", () => {
     expect(recipe.getCostOfIngredients()).to.equal(504);
+
   });
   it("should be able to return a recipe's instructions", () => {
     expect(recipe.getInstructions()).to.deep.equal([
