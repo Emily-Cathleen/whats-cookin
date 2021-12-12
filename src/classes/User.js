@@ -51,7 +51,7 @@ class User {
                 .toLowerCase()
                 .includes(searchedIngredient.toLowerCase())
             )) &&
-        recipe.searchedName.toLowerCase().includes(searchedName.toLowerCase())
+        recipe.name.toLowerCase().includes(searchedName.toLowerCase())
       );
     });
     return filteredIngredient;
