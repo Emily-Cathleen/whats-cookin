@@ -11,13 +11,14 @@ class Cookbook {
       );
     });
     return filteredRecipesByTag;
-  }
+  };
+
   filteredRecipes(searchedIngredient, searchedName) {
     const filteredIngredient = this.recipes.filter((recipe) => {
       // We want to see if the searched ingredient is a substring of some
       // ingredient and the searched name is a substring of the recipe name.
       return (
-        (searchedIngredient == "" ||
+        (searchedIngredient === "" ||
           recipe
             .determineIngredients()
             .some((ingredient) =>
@@ -29,8 +30,8 @@ class Cookbook {
       );
     });
     return filteredIngredient;
-  }
-}
+  };
+};
 
 export default Cookbook;
 
