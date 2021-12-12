@@ -19,7 +19,7 @@ html {
 .nav-bar {
   display: flex;
   flex-direction: column;
-  background-image: url("https://images.unsplash.com/photo-1495195134817-aeb325a55b65?ixlib=rb-1.2.1&auto=format&fit=crop&w=755&q=80");
+  background-image: url("https://images.pexels.com/photos/4261733/pexels-photo-4261733.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   background-size: cover;
 }
 
@@ -31,12 +31,14 @@ html {
 
 .user-name {
   margin-top: 0px;
+  color: white;
 }
 
 
 .whats-cooking {
   display: flex;
   justify-content: center;
+  color: white;
   /* font-size:  */
 }
 
@@ -45,12 +47,14 @@ html {
   display: flex;
   width: 13%;
   margin: 10px 10px 10px 10px;
+  box-shadow: 4px 3px 5px #073034;
 }
 
 .tags-drop-down {
   display: flex;
   padding: 15px 32px;
   margin: 10px 10px 10px 10px;
+  box-shadow: 4px 3px 5px #073034;
 }
 
 .nav-bar-button-container {
@@ -70,6 +74,7 @@ html {
   padding: 15px 32px;
   margin: 10px 10px 10px 10px;
   border-radius: 3%;
+  box-shadow: 4px 3px 5px #073034;
 }
 
 .favorite-recipes-page-button:hover,
@@ -134,16 +139,19 @@ html {
 
 .recipe-view, {
   display: flex;
-  background-color: #ddd6d1c2;
+  background-color: #fbeb9ca6;;
   margin: 30px 30px 30px 30px;
   border-radius: 1%;
 }
 
 .favorite-button,
 .add-to-recipes-to-cook-button {
-  border-radius: 50%;
-  height: 100px;
-  width: 100px;
+  flex-direction: row;
+  text-align: center;
+  padding: 15px 32px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 3%;
+  box-shadow: 4px 3px 5px #073034;
 }
 
 .recipe-image {
