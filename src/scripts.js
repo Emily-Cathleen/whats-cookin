@@ -60,6 +60,10 @@ const user = new User(
   []
 );
 
+// let recipeData;
+// let ingredientsData;
+// let usersData;
+
 /* Event Listeners */
 
 homeButton.addEventListener("click", returnHome);
