@@ -151,14 +151,14 @@ function populateRecipes(element, getRecipes) {
       const isFavorite = user.favoriteRecipes.includes(recipe);
       return `
     <article class="recipe-card">
-        <img class="" src="${recipe.image}" alt="Image of ${
+        <img class="recipe-image" src="${recipe.image}" alt="Image of ${
         recipe.name
       }" width=400>
         <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
         recipe.name
       }</h1>
         <div>
-          <button class="fav-button-${recipe.id}">${
+          <button class="home-page-recipe-card-fav-button fav-button-${recipe.id}">${
         isFavorite ? "Remove from " : "Add to "
       }Favorites</button>
           <p>Tags: ${recipe.tags.join(", ")}</p>
