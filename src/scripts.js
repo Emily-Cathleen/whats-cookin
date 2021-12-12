@@ -17,7 +17,7 @@ const homeButton = document.querySelector(".home-button");
 const favoriteRecipesPageButton = document.querySelector(
   ".favorite-recipes-page-button"
 );
-const shoppingListButton = document.querySelector(".shopping-list-button");
+const recipesToCookButton = document.querySelector(".recipes-to-cook-button");
 const recipeCard = document.querySelector(".recipe-card");
 const filterBar = document.querySelector(".filter-bar");
 const nameSearchInput = document.querySelector("#nameSearchInput");
@@ -25,6 +25,7 @@ const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
 const favoriteButtons = document.querySelectorAll(".favorite-button");
+const recipesToCookPage = document.querySelector(".recipes-to-cook-page");
 
 const hidableElements = [
   homePage,
@@ -32,6 +33,8 @@ const hidableElements = [
   homeButton,
   favoriteRecipesPageButton,
   favoriteRecipePage,
+  recipesToCookPage,
+  recipesToCookButton,
 ];
 function displayElements(elementsToDisplay) {
   elementsToDisplay.forEach(removeHidden);
@@ -61,6 +64,7 @@ const user = new User(
 
 homeButton.addEventListener("click", returnHome);
 tagsDropDown.addEventListener("change", filterByTags);
+recipesToCookButton.addEventListener("click", showRecipesToCookPage);
 
 function getCookbookRecipes() {
   if (nameSearchInput.value || ingredientSearchInput.value) {
@@ -89,9 +93,14 @@ function getUserRecipes() {
   }
 }
 
+function getRecipesToCook() {
+  return user.recipesToCook;
+}
+
 function renderRecipePages() {
   populateRecipes(homePage, getCookbookRecipes);
   populateRecipes(favoriteRecipePage, getUserRecipes);
+  populateRecipes(recipesToCookPage, getRecipesToCook);
 }
 
 function searchRecipes() {
@@ -132,12 +141,17 @@ function removeHidden(element) {
 }
 
 function displayRecipeView(selectedRecipe) {
-  displayElements([recipeView, homeButton, favoriteRecipesPageButton]);
+  displayElements([
+    recipeView,
+    homeButton,
+    favoriteRecipesPageButton,
+    recipesToCookButton,
+  ]);
   showRecipeCard(selectedRecipe);
 }
 
 function returnHome() {
-  displayElements([homePage, favoriteRecipesPageButton]);
+  displayElements([homePage, favoriteRecipesPageButton, recipesToCookButton]);
   renderRecipePages();
 }
 
@@ -184,6 +198,7 @@ renderRecipePages();
 
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
+  const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
   recipeView.innerHTML = `
     <div>
       <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
@@ -192,7 +207,11 @@ function showRecipeCard(selectedRecipe) {
       <button class="favorite-button">${
         isFavorite ? "Unf" : "F"
       }avorite</button>
-      <button class="add-to-cart-button">Add to Cart</button>
+      <button class="add-to-recipes-to-cook-button" ${
+        inRecipesToCook ? "disabled" : ""
+      }>${
+    inRecipesToCook ? "Already in List" : "Add to Recipes to Cook"
+  }</button>
     </div>
     <section class="recipe-info">
       <div>
@@ -228,10 +247,22 @@ function showRecipeCard(selectedRecipe) {
       clickFavoriteButton(selectedRecipe)();
       showRecipeCard(selectedRecipe);
     });
+  document
+    .querySelector(".add-to-recipes-to-cook-button")
+    .addEventListener("click", () => {
+      user.addRecipesToCook(selectedRecipe);
+      renderRecipePages();
+      showRecipeCard(selectedRecipe);
+    });
 }
 
 function showFavoritesPage() {
-  displayElements([favoriteRecipePage, homeButton]);
+  displayElements([favoriteRecipePage, homeButton, recipesToCookButton]);
+  renderRecipePages();
+}
+
+function showRecipesToCookPage() {
+  displayElements([recipesToCookPage, homeButton, favoriteRecipesPageButton]);
   renderRecipePages();
 }
 
