@@ -158,7 +158,7 @@ function populateRecipes(element, getRecipes) {
         recipe.name
       }</h1>
         <div>
-          <button class="home-page-recipe-card-fav-button fav-button-${recipe.id}">${
+          <button class="fav-button-${recipe.id}">${
         isFavorite ? "Remove from " : "Add to "
       }Favorites</button>
           <p>Tags: ${recipe.tags.join(", ")}</p>

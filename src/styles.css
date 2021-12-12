@@ -2,7 +2,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQm25aLkpZwCOGl4nP3GPfY8AsImN8t5j9OyA&usqp=CAU");
+  background: url("https://images.pexels.com/photos/268976/pexels-photo-268976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -47,7 +47,13 @@ html {
   margin: 10px 10px 10px 10px;
 }
 
-.nav-bar-buttons {
+.tags-drop-down {
+  display: flex;
+  padding: 15px 32px;
+  margin: 10px 10px 10px 10px;
+}
+
+.nav-bar-button-container {
   display: flex;
   justify-content: center;
   background: #092541c9;
@@ -59,16 +65,22 @@ html {
 .shopping-list-button,
 .home-button,
 .recipes-to-cook-button {
+  text-align: center;
   display: flex;
-  width: 13%;
+  padding: 15px 32px;
   margin: 10px 10px 10px 10px;
+  border-radius: 3%;
 }
 
-.tags-drop-down {
-  display: flex;
-  width: 13%;
-  margin: 10px 10px 10px 10px;
+.favorite-recipes-page-button:hover,
+.shopping-list-button:hover,
+.home-button:hover,
+.recipes-to-cook-button:hover,
+.search-bar:hover {
+  background-color: #eac57b;
+  transform: scale(1.03);
 }
+
 
 
 .filter-dropdown {
@@ -87,16 +99,21 @@ html {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  /* background: rgb(243 204 29 / 35%); */
   background-color: #fbeb9ca6;
   margin: 10px 10px 10px 10px;
   border-radius: 1%;
   padding: 18px 10px 10px 10px;
+  box-shadow: 10px 10px 5px #541d1a91;
 }
-
-.home-page-recipe-card-fav-button {
-
-}
+/*
+.fav-button {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  padding: 15px 32px;
+  margin: 10px 10px 10px 10px;
+  border-radius: 3%;
+} */
 
 
 /* .recipe-title-individual-card {
@@ -117,7 +134,7 @@ html {
 
 .recipe-view, {
   display: flex;
-  background-color: #ddd6d163;
+  background-color: #ddd6d1c2;
   margin: 30px 30px 30px 30px;
   border-radius: 1%;
 }
@@ -132,6 +149,7 @@ html {
 .recipe-image {
   border-radius: 3%;
   margin: 10px 10px 10px 10px;
+  box-shadow: 10px 10px 5px #541d1a91;
 }
 
 .recipe-info {
