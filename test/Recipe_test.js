@@ -5,9 +5,9 @@ const expect = require("chai").expect;
 
 describe("Recipe", () => {
   let recipe;
-  let recipe2;
   let ingredient1;
   let ingredient2;
+  let ingredient3;
   beforeEach(() => {
     ingredient1 = new Ingredient({
       id: 20081,
@@ -20,6 +20,11 @@ describe("Recipe", () => {
       name: "bicarbonate of soda",
       estimatedCostInCents: 582,
       quantity: { amount: 0.5, unit: "tsp" },
+    });
+    ingredient2 = new Ingredient({
+      name: "honey",
+      estimatedCostInCents: 582,
+      quantity: { amount: 0.57, unit: "c" },
     });
 
     recipe = new Recipe(
@@ -62,6 +67,8 @@ describe("Recipe", () => {
 
   it("should have an id", () => {
     expect(recipe.id).to.equal(123);
+    expect(recipe.id).to.equal(77);
+
 
   });
   it("should have an image", () => {
