@@ -4,7 +4,9 @@ const Ingredient = require("../src/classes/Ingredient.js");
 const expect = require("chai").expect;
 
 describe("Recipe", () => {
-  let recipe;
+//2 recipes to add sad paths to testing
+  let recipe1;
+  let recipe2;
   let ingredient1;
   let ingredient2;
   beforeEach(() => {
@@ -20,13 +22,8 @@ describe("Recipe", () => {
       estimatedCostInCents: 582,
       quantity: { amount: 0.5, unit: "tsp" },
     });
-    ingredient3 = new Ingredient({
-      name: "honey",
-      estimatedCostInCents: 582,
-      quantity: { amount: 0.57, unit: "c" },
-    });
 
-    recipe = new Recipe(
+    recipe1 = new Recipe(
       123,
       "https://spoonacular.com/recipeImages/595736-556x370.jpg",
       [ingredient1, ingredient2],
@@ -40,20 +37,19 @@ describe("Recipe", () => {
       "Eggs",
       ["breakfast", "dairy"]
     );
-
     recipe2 = new Recipe(
-      77,
+      545,
       "https://spoonacular.com/recipeImages/595736-556x370.jpg",
       [ingredient1, ingredient2],
       [
         {
           instruction:
             "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
-          number: 1,
+          number: 2,
         },
       ],
-      "Eggs",
-      []
+      "Waffles",
+      //tags removed to create sad path test where tags should exist for recipe
     );
   });
   it("should be a function", () => {
@@ -61,24 +57,24 @@ describe("Recipe", () => {
   });
 
   it("should be an instance of Recipe", () => {
-    expect(recipe).to.be.an.instanceOf(Recipe);
+    expect(recipe1).to.be.an.instanceOf(Recipe);
   });
 
   it("should have an id", () => {
-    expect(recipe.id).to.equal(123);
-
-
+    expect(recipe1.id).to.equal(123);
   });
+
   it("should have an image", () => {
-    expect(recipe.image).to.equal(
+    expect(recipe1.image).to.equal(
       "https://spoonacular.com/recipeImages/595736-556x370.jpg"
     );
   });
+
   it("should have some ingredients", () => {
-    expect(recipe.ingredients).to.deep.equal([ingredient1, ingredient2]);
+    expect(recipe1.ingredients).to.deep.equal([ingredient1, ingredient2]);
   });
   it("should have some instructions", () => {
-    expect(recipe.instructions).to.deep.equal([
+    expect(recipe1.instructions).to.deep.equal([
       {
         instruction:
           "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",
@@ -86,28 +82,30 @@ describe("Recipe", () => {
       },
     ]);
   });
+
   it("should have a name", () => {
-    expect(recipe.name).to.equal("Eggs");
-  
-  });
-  it("should have tags", () => {
-    expect(recipe.tags).to.deep.equal(["breakfast", "dairy"]);
-    expect(recipe2.tags).to.deep.equal([]);
+    expect(recipe1.name).to.equal("Eggs");
 
   });
+  it("should have tags", () => {
+    expect(recipe1.tags).to.deep.equal(["breakfast", "dairy"]);
+    //sad path recipe test ex below
+    expect(recipe2.tags).to.deep.equal(undefined);
+  });
+
   it("should be able to determine required ingredients", () => {
-    expect(recipe.determineIngredients()).to.deep.equal([
+    expect(recipe1.determineIngredients()).to.deep.equal([
       "wheat flour",
       "bicarbonate of soda",
     ]);
   });
 
   it("should be able to get cost of ingredients", () => {
-    expect(recipe.getCostOfIngredients()).to.equal(504);
+    expect(recipe1.getCostOfIngredients()).to.equal(504);
 
   });
   it("should be able to return a recipe's instructions", () => {
-    expect(recipe.getInstructions()).to.deep.equal([
+    expect(recipe1.getInstructions()).to.deep.equal([
       {
         instruction:
           "In a large mixing bowl, whisk together the dry ingredients (flour, pudding mix, soda and salt). Set aside.In a large mixing bowl of a stand mixer, cream butter for 30 seconds. Gradually add granulated sugar and brown sugar and cream until light and fluffy.",

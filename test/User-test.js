@@ -64,6 +64,7 @@ describe("User", () => {
       ["dinner", "main course"]
     );
     user2 = new User({
+      id: 2,
     });
     recipe3 = new Recipe(
       490,
@@ -96,7 +97,6 @@ describe("User", () => {
 
   it("should have an id", () => {
     expect(user1.id).to.equal(1);
-    expect(user2.id).to.equal(undefined);
   });
 
   it("should have a pantry", () => {
