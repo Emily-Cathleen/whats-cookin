@@ -1,12 +1,14 @@
 import "./styles.css";
-import { recipeData } from "./data/recipes.js";
+// import { recipeData } from "./data/recipes.js";
 import { ingredientsData } from "./data/ingredients.js";
-import { userData } from "./data/users.js";
+// import { userData } from "./data/users.js";
 import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 import User from "./classes/User.js";
 import { fetchUsers } from "./apiCalls.js";
+import { fetchIngredients } from "./apiCalls.js";
+import { fetchRecipes } from "./apiCalls.js";
 
 /* QUERY SELECTORS */
 
@@ -43,12 +45,10 @@ function displayElements(elementsToDisplay) {
     .forEach(addHidden);
 }
 
-//
-
 let user;
-
-// let recipeData;
-// let ingredientsData;
+let ingredients;
+let recipes;
+let cookbook;
 
 /* Event Listeners */
 window.addEventListener("load", loadAPIs);
@@ -58,9 +58,25 @@ recipesToCookButton.addEventListener("click", showRecipesToCookPage);
 
 async function loadAPIs() {
   let usersData = await fetchUsers();
+  let ingredientsData = await fetchIngredients();
+  let recipesData = await fetchRecipes();
   const randomUser = Math.round(Math.random() * (usersData.length + 1));
   user = new User(usersData[randomUser]);
   console.log(user);
+  recipes = recipesData.map(
+    ({ id, image, ingredients, instructions, name, tags }) => {
+      const ingredientObjects = ingredients.map(({ id, quantity }) => {
+        const { name, estimatedCostInCents } = ingredientsData.find(
+          (ingredientData) => ingredientData.id === id
+        );
+        return new Ingredient({ id, name, estimatedCostInCents, quantity });
+      });
+      return new Recipe(id, image, ingredientObjects, instructions, name, tags);
+    }
+  );
+
+  cookbook = new Cookbook(recipes);
+  renderRecipePages();
 }
 
 function getCookbookRecipes() {
@@ -114,19 +130,6 @@ function filterByTags() {
   renderRecipePages();
 }
 
-const recipes = recipeData.map(
-  ({ id, image, ingredients, instructions, name, tags }) => {
-    const ingredientObjects = ingredients.map(({ id, quantity }) => {
-      const { name, estimatedCostInCents } = ingredientsData.find(
-        (ingredientData) => ingredientData.id === id
-      );
-      return new Ingredient({ id, name, estimatedCostInCents, quantity });
-    });
-    return new Recipe(id, image, ingredientObjects, instructions, name, tags);
-  }
-);
-
-let cookbook = new Cookbook(recipes);
 // console.log(cookbook.filterTags(["snack"]));
 
 function addHidden(element) {
@@ -191,7 +194,7 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
-renderRecipePages();
+//
 
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
