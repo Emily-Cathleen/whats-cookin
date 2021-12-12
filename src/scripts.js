@@ -3,10 +3,10 @@ import { recipeData } from "./data/recipes.js";
 import { ingredientsData } from "./data/ingredients.js";
 import { userData } from "./data/users.js";
 import Ingredient from "./classes/Ingredient.js";
-import apiCalls from "./apiCalls";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 import User from "./classes/User.js";
+import { fetchUsers } from "./apiCalls.js";
 
 /* QUERY SELECTORS */
 
@@ -43,32 +43,25 @@ function displayElements(elementsToDisplay) {
     .forEach(addHidden);
 }
 
-const user = new User(
-  "Franny",
-  2,
-  [
-    {
-      ingredient: 11297,
-      amount: 4,
-    },
-    {
-      ingredient: 1082047,
-      amount: 10,
-    },
-  ],
-  [],
-  []
-);
+//
+
+let user;
 
 // let recipeData;
 // let ingredientsData;
-// let usersData;
 
 /* Event Listeners */
-
+window.addEventListener("load", loadAPIs);
 homeButton.addEventListener("click", returnHome);
 tagsDropDown.addEventListener("change", filterByTags);
 recipesToCookButton.addEventListener("click", showRecipesToCookPage);
+
+async function loadAPIs() {
+  let usersData = await fetchUsers();
+  const randomUser = Math.round(Math.random() * (usersData.length + 1));
+  user = new User(usersData[randomUser]);
+  console.log(user);
+}
 
 function getCookbookRecipes() {
   if (nameSearchInput.value || ingredientSearchInput.value) {
