@@ -4,7 +4,6 @@ const Ingredient = require("../src/classes/Ingredient.js");
 const expect = require("chai").expect;
 
 describe("Recipe", () => {
-//2 recipes to add sad paths to testing
   let recipe1;
   let recipe2;
   let ingredient1;
@@ -48,8 +47,7 @@ describe("Recipe", () => {
           number: 2,
         },
       ],
-      "Waffles",
-      //tags removed to create sad path test where tags should exist for recipe
+      "Waffles"
     );
   });
   it("should be a function", () => {
@@ -85,11 +83,9 @@ describe("Recipe", () => {
 
   it("should have a name", () => {
     expect(recipe1.name).to.equal("Eggs");
-
   });
   it("should have tags", () => {
     expect(recipe1.tags).to.deep.equal(["breakfast", "dairy"]);
-    //sad path recipe test ex below
     expect(recipe2.tags).to.deep.equal(undefined);
   });
 
@@ -102,7 +98,6 @@ describe("Recipe", () => {
 
   it("should be able to get cost of ingredients", () => {
     expect(recipe1.getCostOfIngredients()).to.equal(504);
-
   });
   it("should be able to return a recipe's instructions", () => {
     expect(recipe1.getInstructions()).to.deep.equal([
