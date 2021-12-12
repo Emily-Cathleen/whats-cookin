@@ -1,6 +1,6 @@
 import "./styles.css";
 // import { recipeData } from "./data/recipes.js";
-import { ingredientsData } from "./data/ingredients.js";
+// import { ingredientsData } from "./data/ingredients.js";
 // import { userData } from "./data/users.js";
 import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
@@ -60,7 +60,7 @@ async function loadAPIs() {
   let usersData = await fetchUsers();
   let ingredientsData = await fetchIngredients();
   let recipesData = await fetchRecipes();
-  const randomUser = Math.round(Math.random() * (usersData.length + 1));
+  const randomUser = Math.round(Math.random() * usersData.length);
   user = new User(usersData[randomUser]);
   console.log(user);
   recipes = recipesData.map(
@@ -130,8 +130,6 @@ function filterByTags() {
   renderRecipePages();
 }
 
-// console.log(cookbook.filterTags(["snack"]));
-
 function addHidden(element) {
   element.classList.add("hidden");
 }
@@ -177,20 +175,20 @@ function populateRecipes(element, getRecipes) {
       </article>`;
     })
     .join("");
-  document.querySelectorAll(".recipe-title").forEach((recipeTitle) => {
+  element.querySelectorAll(".recipe-title").forEach((recipeTitle) => {
     recipeTitle.addEventListener("click", (event) => {
       const recipeId = parseInt(event.target.dataset.recipeId);
+      console.log(event.target);
       const selectedRecipe = recipes.find(({ id }) => id === recipeId);
-      displayRecipeView(selectedRecipe);
+      if (selectedRecipe) {
+        displayRecipeView(selectedRecipe);
+      }
     });
   });
   recipes.forEach((recipe) => {
-    const favButton = document.querySelectorAll(`.fav-button-${recipe.id}`);
+    const favButton = element.querySelectorAll(`.fav-button-${recipe.id}`);
     favButton.forEach((button) => {
-      button.addEventListener(
-        "click",
-        clickFavoriteButton(recipe, getRecipes, element)
-      );
+      button.addEventListener("click", clickFavoriteButton(recipe));
     });
   });
 }
@@ -199,6 +197,7 @@ function populateRecipes(element, getRecipes) {
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
+  console.log(selectedRecipe);
   recipeView.innerHTML = `
     <div>
       <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
@@ -241,12 +240,13 @@ function showRecipeCard(selectedRecipe) {
           .join("")}
       </div>
       </section>`;
-  document
-    .querySelector(".favorite-button")
-    .addEventListener("click", (event) => {
+  document.querySelectorAll(".favorite-button").forEach((button) => {
+    button.addEventListener("click", () => {
       clickFavoriteButton(selectedRecipe)();
       showRecipeCard(selectedRecipe);
     });
+  });
+
   document
     .querySelector(".add-to-recipes-to-cook-button")
     .addEventListener("click", () => {
@@ -268,7 +268,9 @@ function showRecipesToCookPage() {
 
 function clickFavoriteButton(recipe) {
   return () => {
+    console.log("clicked");
     const isFavorite = user.favoriteRecipes.includes(recipe);
+    console.log(isFavorite);
     if (isFavorite) {
       user.removeRecipeFromFavorites(recipe);
     } else {
