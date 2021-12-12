@@ -5,14 +5,17 @@ const Ingredient = require("../src/classes/Ingredient.js");
 const User = require("../src/classes/User.js");
 
 describe("User", () => {
-  let user;
+  let user1;
+  let user2;
   let ingredient1;
   let ingredient2;
+  let ingredient3;
   let recipe1;
   let recipe2;
+  let recipe3;
 
   beforeEach(() => {
-    user = new User({
+    user1 = new User({
       name: "Saige O'Kon",
       id: 1,
       pantry: [
@@ -60,6 +63,23 @@ describe("User", () => {
       "Steak",
       ["dinner", "main course"]
     );
+    user2 = new User({
+      id: 2,
+    });
+    recipe3 = new Recipe(
+      490,
+      "https://spoonacular.com/recipeImages/595736-556x370.jpg",
+      [ingredient1, ingredient3],
+      [
+        {
+          instruction:
+            "In a large bowl, whisk together the ingredients and bake at 350",
+          number: 6,
+        },
+      ],
+      "Chocolate Cake",
+      ["dessert", "chocolate", "snack"]
+    );
   });
 
   it("Should be a function", () => {
@@ -67,61 +87,65 @@ describe("User", () => {
   });
 
   it("should be an instance of User", () => {
-    expect(user).to.be.an.instanceOf(User);
+    expect(user1).to.be.an.instanceOf(User);
   });
 
   it("should have a name", () => {
-    expect(user.name).to.equal("Saige O'Kon");
+    expect(user1.name).to.equal("Saige O'Kon");
+    expect(user2.name).to.equal(undefined);
   });
 
   it("should have an id", () => {
-    expect(user.id).to.equal(1);
+    expect(user1.id).to.equal(1);
   });
 
   it("should have a pantry", () => {
-    expect(user.pantry).to.deep.equal([
+    expect(user1.pantry).to.deep.equal([
       { ingredient: 11297, amount: 4 },
       { ingredient: 1082047, amount: 10 },
       { ingredient: 20081, amount: 5 },
     ]);
+    expect(user2.pantry).to.deep.equal(undefined);
   });
 
   it("should start with zero favorite recipes", () => {
-    expect(user.favoriteRecipes).to.deep.equal([]);
+    expect(user1.favoriteRecipes).to.deep.equal([]);
   });
 
   it("should be able to add a recipe to favorite recipes", () => {
-    user.addFavoriteRecipe(recipe1);
-    expect(user.favoriteRecipes).to.deep.equal([recipe1]);
+    user1.addFavoriteRecipe(recipe1);
+    expect(user1.favoriteRecipes).to.deep.equal([recipe1]);
+    expect(user2.favoriteRecipes).to.deep.equal([]);
+
   });
 
   it("should start with zero recipes to cook", () => {
-    expect(user.recipesToCook).to.deep.equal([]);
+    expect(user1.recipesToCook).to.deep.equal([]);
   });
 
   it("should be able to add a recipe to recipes to cook", () => {
-    user.addRecipesToCook(recipe1);
-    expect(user.recipesToCook).to.deep.equal([recipe1]);
+    user1.addRecipesToCook(recipe1);
+    expect(user1.recipesToCook).to.deep.equal([recipe1]);
   });
 
   it("should be able to remove a recipe from favorites", () => {
-    user.addFavoriteRecipe(recipe1);
-    user.addFavoriteRecipe(recipe2);
-    user.removeRecipeFromFavorites(recipe1);
-    expect(user.favoriteRecipes).to.deep.equal([recipe2]);
+    user1.addFavoriteRecipe(recipe1);
+    user1.addFavoriteRecipe(recipe2);
+    user1.removeRecipeFromFavorites(recipe1);
+    expect(user1.favoriteRecipes).to.deep.equal([recipe2]);
   });
 
   it("should be able to remove a recipe from recipes from cook list", () => {
-    user.addRecipesToCook(recipe1);
-    user.addRecipesToCook(recipe2);
-    user.removeRecipesToBeCooked(recipe1);
-    expect(user.recipesToCook).to.deep.equal([recipe2]);
+    user1.addRecipesToCook(recipe1);
+    user1.addRecipesToCook(recipe2);
+    user1.removeRecipesToBeCooked(recipe1);
+    expect(user1.recipesToCook).to.deep.equal([recipe2]);
   });
 
   it("should be able to filter favorite recipes by one or more tags", () => {
-    user.addFavoriteRecipe(recipe1);
-    user.addFavoriteRecipe(recipe2);
-    expect(user.filterTags(["dessert", "snack"])).to.deep.equal([recipe1]);
+    user1.addFavoriteRecipe(recipe1);
+    user1.addFavoriteRecipe(recipe2);
+    expect(user1.filterTags(["dessert", "snack"])).to.deep.equal([recipe1]);
   });
 
   // it("should be able to filter favorite recipes by ingredient name", () => {

@@ -5,6 +5,7 @@ const Ingredient = require("../src/classes/Ingredient.js");
 
 describe("Cookbook", () => {
   let cookbook;
+  let cookbook2;
   let recipe1;
   let recipe2;
   let recipe3;
@@ -12,6 +13,7 @@ describe("Cookbook", () => {
   let ingredient2;
   let ingredient3;
   let ingredient4;
+
 
   beforeEach(() => {
     ingredient1 = new Ingredient({
@@ -79,6 +81,7 @@ describe("Cookbook", () => {
       ["snack", "appetizer"]
     );
     cookbook = new Cookbook([recipe1, recipe2, recipe3]);
+    cookbook2 = new Cookbook([undefined]);
   });
   it("Should be a function", () => {
     expect(Cookbook).to.be.a("function");
@@ -90,6 +93,7 @@ describe("Cookbook", () => {
 
   it("should have recipes", () => {
     expect(cookbook.recipes).to.deep.equal([recipe1, recipe2, recipe3]);
+    expect(cookbook2.recipes).to.deep.equal([undefined]);
   });
 
   it("should return a list of recipes corresponding to selected tags", () => {
