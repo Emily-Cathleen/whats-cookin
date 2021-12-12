@@ -21,6 +21,7 @@ const filterBar = document.querySelector(".filter-bar");
 const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
+const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
 
 /* Event Listeners */
 
@@ -83,6 +84,7 @@ function returnHome() {
   addHidden(homeButton);
   removeHidden(homePage);
   addHidden(recipeView);
+  removeHidden(savedRecipesButton);
 }
 
 function populateRecipes(recipes) {
@@ -149,3 +151,13 @@ function showRecipeCard(selectedRecipe) {
       </div>
       </section>`;
 };
+
+
+function showFavoritesPage() {
+  addHidden(homePage);
+  removeHidden(favoriteRecipePage);
+  removeHidden(homeButton);
+  addHidden(savedRecipesButton);
+};
+
+savedRecipesButton.addEventListener('click', showFavoritesPage)
