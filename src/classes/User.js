@@ -12,6 +12,11 @@ class User {
     this.recipesToCook = [];
   }
 
+  getFirstName() {
+    const firstName = this.name.split(" ");
+    return firstName[0];
+  }
+
   addFavoriteRecipe(recipe) {
     if (!this.favoriteRecipes.includes(recipe)) {
       this.favoriteRecipes.push(recipe);

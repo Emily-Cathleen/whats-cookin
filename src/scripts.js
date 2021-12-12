@@ -28,6 +28,7 @@ const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
 const favoriteButtons = document.querySelectorAll(".favorite-button");
 const recipesToCookPage = document.querySelector(".recipes-to-cook-page");
+const userName = document.querySelector(".user-name");
 
 const hidableElements = [
   homePage,
@@ -62,7 +63,7 @@ async function loadAPIs() {
   let recipesData = await fetchRecipes();
   const randomUser = Math.round(Math.random() * usersData.length);
   user = new User(usersData[randomUser]);
-  console.log(user);
+  userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
   recipes = recipesData.map(
     ({ id, image, ingredients, instructions, name, tags }) => {
       const ingredientObjects = ingredients.map(({ id, quantity }) => {
