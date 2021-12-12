@@ -14,7 +14,7 @@ const recipeTitle = document.querySelector("#openRecipe");
 const homePage = document.querySelector(".home-page");
 const recipeView = document.querySelector(".recipe-view");
 const homeButton = document.querySelector(".home-button");
-const savedRecipesButton = document.querySelector(".saved-recipes-button");
+const favoriteRecipesPageButton = document.querySelector(".favorite-recipes-page-button");
 const shoppingListButton = document.querySelector(".shopping-list-button");
 const recipeCard = document.querySelector(".recipe-card");
 const filterBar = document.querySelector(".filter-bar");
@@ -22,6 +22,16 @@ const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
+const user = new User("Franny", 2,
+        [{
+          "ingredient": 11297,
+          "amount": 4
+        },
+        {
+          "ingredient": 1082047,
+          "amount": 10
+        }], [], []);
+
 
 /* Event Listeners */
 
@@ -84,7 +94,7 @@ function returnHome() {
   addHidden(homeButton);
   removeHidden(homePage);
   addHidden(recipeView);
-  removeHidden(savedRecipesButton);
+  removeHidden(favoriteRecipesPageButton);
 }
 
 function populateRecipes(recipes) {
@@ -157,7 +167,15 @@ function showFavoritesPage() {
   addHidden(homePage);
   removeHidden(favoriteRecipePage);
   removeHidden(homeButton);
-  addHidden(savedRecipesButton);
+  addHidden(favoriteRecipesPageButton);
+  // clickFavoriteButton();
 };
 
-savedRecipesButton.addEventListener('click', showFavoritesPage)
+function clickFavoriteButton(recipe) {
+  user.addFavoriteRecipe(recipe);
+
+};
+
+
+
+favoriteRecipesPageButton.addEventListener('click', showFavoritesPage)
