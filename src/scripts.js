@@ -1,7 +1,4 @@
 import "./styles.css";
-// import { recipeData } from "./data/recipes.js";
-// import { ingredientsData } from "./data/ingredients.js";
-// import { userData } from "./data/users.js";
 import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
@@ -39,6 +36,7 @@ const hidableElements = [
   recipesToCookPage,
   recipesToCookButton,
 ];
+
 function displayElements(elementsToDisplay) {
   elementsToDisplay.forEach(removeHidden);
   hidableElements
