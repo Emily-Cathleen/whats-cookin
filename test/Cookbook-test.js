@@ -13,7 +13,7 @@ describe("Cookbook", () => {
   let ingredient2;
   let ingredient3;
   let ingredient4;
-  
+
 
   beforeEach(() => {
     ingredient1 = new Ingredient({
