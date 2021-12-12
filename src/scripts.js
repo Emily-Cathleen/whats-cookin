@@ -25,6 +25,21 @@ const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
 const favoriteButtons = document.querySelectorAll(".favorite-button");
+
+const hidableElements = [
+  homePage,
+  recipeView,
+  homeButton,
+  favoriteRecipesPageButton,
+  favoriteRecipePage,
+];
+function displayElements(elementsToDisplay) {
+  elementsToDisplay.forEach(removeHidden);
+  hidableElements
+    .filter((element) => !elementsToDisplay.includes(element))
+    .forEach(addHidden);
+}
+
 const user = new User(
   "Franny",
   2,
@@ -47,30 +62,50 @@ const user = new User(
 homeButton.addEventListener("click", returnHome);
 tagsDropDown.addEventListener("change", filterByTags);
 
-//search recipe function calls the populateRecipes function using input variables from both search bars
+function getCookbookRecipes() {
+  if (nameSearchInput.value || ingredientSearchInput.value) {
+    const ingredientInput = ingredientSearchInput.value;
+    const nameInput = nameSearchInput.value;
+    return cookbook.filteredRecipes(ingredientInput, nameInput);
+  } else if (tagsDropDown.value !== "none") {
+    const tagInput = tagsDropDown.value;
+    //written this way in case we want to try multiple tags at once in future. Should still work with dropdown
+    return cookbook.filterTags(tagInput.split(",").map((tag) => tag.trim()));
+  } else {
+    return cookbook.recipes;
+  }
+}
+
+function getUserRecipes() {
+  if (nameSearchInput.value || ingredientSearchInput.value) {
+    const ingredientInput = ingredientSearchInput.value;
+    const nameInput = nameSearchInput.value;
+    return user.filterByNameAndIngredient(nameInput, ingredientInput);
+  } else if (tagsDropDown.value !== "none") {
+    const tagInput = tagsDropDown.value;
+    return user.filterTags(tagInput.split(",").map((tag) => tag.trim()));
+  } else {
+    return user.favoriteRecipes;
+  }
+}
+
+function renderRecipePages() {
+  populateRecipes(homePage, getCookbookRecipes);
+  populateRecipes(favoriteRecipePage, getUserRecipes);
+}
+
 function searchRecipes() {
-  const nameInput = nameSearchInput.value;
-  const ingredientInput = ingredientSearchInput.value;
-  populateRecipes(
-    homePage,
-    cookbook.filteredRecipes(ingredientInput, nameInput)
-  );
+  tagsDropDown.value = "none";
+  renderRecipePages();
 }
 
 nameSearchInput.addEventListener("input", searchRecipes);
 ingredientSearchInput.addEventListener("input", searchRecipes);
 
 function filterByTags() {
-  const tagInput = tagsDropDown.value;
-  if (tagInput === "none") {
-    populateRecipes(homePage, cookbook.recipes);
-    return;
-  }
-  populateRecipes(
-    homePage,
-    //written this way in case we want to try multiple tags at once in future. Should still work with dropdown
-    cookbook.filterTags(tagInput.split(",").map((tag) => tag.trim()))
-  );
+  nameSearchInput.value = "";
+  ingredientSearchInput.value = "";
+  renderRecipePages();
 }
 
 const recipes = recipeData.map(
@@ -97,20 +132,17 @@ function removeHidden(element) {
 }
 
 function displayRecipeView(selectedRecipe) {
-  addHidden(homePage);
-  removeHidden(recipeView);
-  removeHidden(homeButton);
+  displayElements([recipeView, homeButton, favoriteRecipesPageButton]);
   showRecipeCard(selectedRecipe);
 }
 
 function returnHome() {
-  addHidden(homeButton);
-  removeHidden(homePage);
-  addHidden(recipeView);
-  removeHidden(favoriteRecipesPageButton);
+  displayElements([homePage, favoriteRecipesPageButton]);
+  renderRecipePages();
 }
 
-function populateRecipes(element, recipes) {
+function populateRecipes(element, getRecipes) {
+  const recipes = getRecipes();
   element.innerHTML = recipes
     .map((recipe) => {
       const isFavorite = user.favoriteRecipes.includes(recipe);
@@ -123,7 +155,7 @@ function populateRecipes(element, recipes) {
         recipe.name
       }</h1>
         <div>
-          <button id="fav-button-${recipe.id}">${
+          <button class="fav-button-${recipe.id}">${
         isFavorite ? "Remove from " : "Add to "
       }Favorites</button>
           <p>Tags: ${recipe.tags.join(", ")}</p>
@@ -139,19 +171,27 @@ function populateRecipes(element, recipes) {
     });
   });
   recipes.forEach((recipe) => {
-    const favButton = document.querySelector(`#fav-button-${recipe.id}`);
-    favButton.addEventListener("click", clickFavoriteButton(recipe));
+    const favButton = document.querySelectorAll(`.fav-button-${recipe.id}`);
+    favButton.forEach((button) => {
+      button.addEventListener(
+        "click",
+        clickFavoriteButton(recipe, getRecipes, element)
+      );
+    });
   });
 }
-populateRecipes(homePage, cookbook.recipes);
+renderRecipePages();
 
 function showRecipeCard(selectedRecipe) {
+  const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   recipeView.innerHTML = `
     <div>
       <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
     selectedRecipe.name
   }">
-      <button class="favorite-button">Favorite</button>
+      <button class="favorite-button">${
+        isFavorite ? "Unf" : "F"
+      }avorite</button>
       <button class="add-to-cart-button">Add to Cart</button>
     </div>
     <section class="recipe-info">
@@ -182,26 +222,28 @@ function showRecipeCard(selectedRecipe) {
           .join("")}
       </div>
       </section>`;
+  document
+    .querySelector(".favorite-button")
+    .addEventListener("click", (event) => {
+      clickFavoriteButton(selectedRecipe)();
+      showRecipeCard(selectedRecipe);
+    });
 }
 
 function showFavoritesPage() {
-  addHidden(homePage);
-  removeHidden(favoriteRecipePage);
-  removeHidden(homeButton);
-  addHidden(favoriteRecipesPageButton);
-  populateRecipes(favoriteRecipePage, user.favoriteRecipes);
+  displayElements([favoriteRecipePage, homeButton]);
+  renderRecipePages();
 }
 
 function clickFavoriteButton(recipe) {
-  return (event) => {
+  return () => {
     const isFavorite = user.favoriteRecipes.includes(recipe);
     if (isFavorite) {
       user.removeRecipeFromFavorites(recipe);
-      event.target.innerText = "Add to Favorites";
     } else {
       user.addFavoriteRecipe(recipe);
-      event.target.innerText = "Remove from Favorites";
     }
+    renderRecipePages();
   };
 }
 
