@@ -6,6 +6,7 @@ const User = require("../src/classes/User.js");
 
 describe("User", () => {
   let user;
+  let user2;
   let ingredient1;
   let ingredient2;
   let recipe1;
@@ -60,6 +61,14 @@ describe("User", () => {
       "Steak",
       ["dinner", "main course"]
     );
+    user2 = new User({
+      id: 2,
+      pantry: [
+        { ingredient: 11233, amount: 8 },
+        { ingredient: 1762047, amount: 100 },
+        { ingredient: 20861, amount: 25 },
+      ],
+    });
   });
 
   it("Should be a function", () => {
@@ -72,6 +81,7 @@ describe("User", () => {
 
   it("should have a name", () => {
     expect(user.name).to.equal("Saige O'Kon");
+    expect(user2.name).to.equal(undefined);
   });
 
   it("should have an id", () => {
