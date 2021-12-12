@@ -21,7 +21,7 @@ describe("Recipe", () => {
       estimatedCostInCents: 582,
       quantity: { amount: 0.5, unit: "tsp" },
     });
-    ingredient2 = new Ingredient({
+    ingredient3 = new Ingredient({
       name: "honey",
       estimatedCostInCents: 582,
       quantity: { amount: 0.57, unit: "c" },
@@ -67,7 +67,7 @@ describe("Recipe", () => {
 
   it("should have an id", () => {
     expect(recipe.id).to.equal(123);
-    expect(recipe.id).to.equal(77);
+    expect(recipe.id).to.equal(undefined);
 
 
   });
