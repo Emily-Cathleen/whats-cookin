@@ -4,12 +4,16 @@ const expect = require("chai").expect;
 
 describe("Ingredient", () => {
   let ingredient;
+  let ingredient2;
   beforeEach(() => {
     ingredient = new Ingredient({
       id: 20081,
       name: "wheat flour",
       estimatedCostInCents: 142,
       quantity: { amount: 2, unit: "tsp" },
+    });
+    ingredient2 = new Ingredient({
+      quantity: { amount: 22, unit: "c" },
     });
   });
   it("should be a function", () => {
@@ -22,14 +26,20 @@ describe("Ingredient", () => {
 
   it("should have an id", () => {
     expect(ingredient.id).to.equal(20081);
+    expect(ingredient2.id).to.equal(undefined);
+
   });
 
   it("should have a name", () => {
     expect(ingredient.name).to.equal("wheat flour");
+    expect(ingredient2.name).to.equal(undefined);
+
   });
 
   it("should have an estimated cost in cents", () => {
     expect(ingredient.estimatedCostInCents).to.equal(142);
+    expect(ingredient2.estimatedCostInCents).to.equal(undefined);
+
   });
 
   it("should be ale to calculate ingredient cost", () => {
