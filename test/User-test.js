@@ -116,7 +116,6 @@ describe("User", () => {
     user1.addFavoriteRecipe(recipe1);
     expect(user1.favoriteRecipes).to.deep.equal([recipe1]);
     expect(user2.favoriteRecipes).to.deep.equal([]);
-
   });
 
   it("should start with zero recipes to cook", () => {
@@ -148,18 +147,19 @@ describe("User", () => {
     expect(user1.filterTags(["dessert", "snack"])).to.deep.equal([recipe1]);
   });
 
-  // it("should be able to filter favorite recipes by ingredient name", () => {
-  //   user.addFavoriteRecipe(recipe1);
-  //   user.addFavoriteRecipe(recipe2);
-  //   expect(
-  //     user.filterByNameAndIngredient("steak", "wheat flour")
-  //   ).to.deep.equal([recipe2]);
-  // });
-  // it("should be able to filter favorite recipes by name", () => {
-  //   user.addFavoriteRecipe(recipe1);
-  //   user.addFavoriteRecipe(recipe2);
-  //   expect(
-  //     user.filterByNameAndIngredient("steak", "wheat flour")
-  //   ).to.deep.equal([recipe2]);
-  // });
+  it("should be able to filter favorite recipes by ingredient name", () => {
+    user1.addFavoriteRecipe(recipe1);
+    user1.addFavoriteRecipe(recipe2);
+    expect(user1.filterByNameAndIngredient("", "wheat flour")).to.deep.equal([
+      recipe1,
+      recipe2,
+    ]);
+  });
+  it("should be able to filter favorite recipes by name", () => {
+    user1.addFavoriteRecipe(recipe1);
+    user1.addFavoriteRecipe(recipe2);
+    expect(user1.filterByNameAndIngredient("steak", "")).to.deep.equal([
+      recipe2,
+    ]);
+  });
 });
