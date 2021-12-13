@@ -8,39 +8,40 @@
   </head>
 <body>
   <nav class="nav-bar">
-    <input class ="search-bar" id="nameSearchInput" type="search" placeholder="Search By Recipe Name">
-    <input class ="search-bar" id="ingredientSearchInput" type="search" placeholder="Search By Ingredient">
-    <h1 class="whats-cooking">What's Cooking?</h1>
-    <h3 class="user-name"></h3>
-    <section class="nav-bar-buttons">
+    <div class="title-and-greeting">
+      <h1 class="whats-cooking">What's Cooking?</h1>
+      <h3 class="user-name"></h3>
+    </div>
+    <section class="nav-bar-button-container">
+      <input class ="search-bar" id="nameSearchInput" type="search" placeholder="Search By Recipe Name">
+      <input class ="search-bar" id="ingredientSearchInput" type="search" placeholder="Search By Ingredient">
+      <label for="food type">Filter by Tag:</label>
+      <select name="tags" class="tags-drop-down" id="tags">
+        <option value="none">none</option>
+        <option value="snack">snack</option>
+        <option value="antipasto">antipasto</option>
+        <option value="lunch">lunch</option>
+        <option value="main dish">main dish</option>
+        <option value="sauce">sauce</option>
+        <option value="morning meal">morning meal</option>
+        <option value="breakfast">breakfast</option>
+        <option value="condiment">condiment</option>
+        <option value="spread">spread</option>
+        <option value="starter">starter</option>
+        <option value="appetizer">appetizer</option>
+        <option value="hor d'oeuvre">hor d'oeuvre</option>
+        <option value="main course">main course</option>
+        <option value="dinner">dinner</option>
+        <option value="side dish">side dish</option>
+        <option value="brunch">brunch</option>
+        <option value="salad">salad</option>
+        <option value="dip">dip</option>
+      </select>
       <button class="home-button hidden">Home</button>
       <button class ="favorite-recipes-page-button">Favorite Recipes</button>
       <button class="recipes-to-cook-button">Recipes to Cook</button>
     </section>
   </nav>
-    <label for="food type">Filter by Tag:</label>
-    <select name="tags" class="tags-drop-down" id="tags">
-      <option value="none">none</option>
-      <option value="snack">snack</option>
-      <option value="antipasto">antipasto</option>
-      <option value="lunch">lunch</option>
-      <option value="main dish">main dish</option>
-      <option value="sauce">sauce</option>
-      <option value="morning meal">morning meal</option>
-      <option value="breakfast">breakfast</option>
-      <option value="condiment">condiment</option>
-      <option value="spread">spread</option>
-      <option value="starter">starter</option>
-      <option value="appetizer">appetizer</option>
-      <option value="hor d'oeuvre">hor d'oeuvre</option>
-      <option value="main course">main course</option>
-      <option value="dinner">dinner</option>
-      <option value="side dish">side dish</option>
-      <option value="brunch">brunch</option>
-      <option value="salad">salad</option>
-      <option value="dip">dip</option>
-    </select>
-    </div>
     <section class="home-page"></section>
     <section class="recipe-view hidden"></section>
     <section class="favorite-recipe-page hidden"></section>
