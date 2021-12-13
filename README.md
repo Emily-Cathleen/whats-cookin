@@ -1,22 +1,43 @@
-# What's Cookin'? Starter Kit 
+#  What's Cooking
 
-The details of this project are outlined in the <a href="https://frontend.turing.edu/projects/What%27sCookin-PartOne.html" target="\__blank">project spec</a>.
+## Description
 
-## Set Up 
+## Navigating the Site
 
-1. Within your group, decide on one person to have the project repository on their Github account. This person will *fork* this repository - on the top right corner of the page, click the fork button. 
-2. All group members should then clone down the forked repository (make sure that everyone is added as a collaborator as well). Since you don't want your project to be named "whats-cookin-starter-kit", add an optional argument after the repo url when cloning. The command should look like this: `git clone [remote-address] [what you want to name the repo]`.
-3. Once you have cloned the repo, change into the directory and install the project dependencies. Run `npm install` or `npm i` to install project dependencies.
-4. Run `npm start` and visit `localhost:8080`
-5. Make sure both members of your team are collaborators on the forked repo.
+## Home Page View
 
-## Testing 
+![](https://media.giphy.com/media/r1iyOUPGkIZUjIdq3L/giphy.gif)
 
-Mocha and chai are already set up, with a boilerplate test for you. 
+## Favoriting a Recipe
 
-## Linting Your Code 
+![](https://media.giphy.com/media/7CmX3IktpvSitK95Vi/giphy.gif)
 
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit, but that's ok - the linter is still running successfully.
+## Set Up
+1. Fork [this](https://github.com/Emily-Cathleen/whats-cookin-starter-kit) repository.
+2. Clone forked repository to your machine.
+3. Open repository in your command line.
+4. Run `open index.html` to view it in the browser
 
-Your linter will look only at the JavaScript files you have within the src and the test directories.
+OR find live link [HERE](https://emily-cathleen.github.io/whats-cookin-starter-kit/)
 
+## Program Languages
+* JavaScript
+* HTML
+* CSS
+* Mocha
+* Chai
+
+## Future State
+*
+
+## Challenges
+*
+
+## Wins
+*
+
+## Project Members
+This project was completed at the Turing School of Software & Design. Functionality and design by
+* [Susanna Cary](https://github.com/susannaopal)
+* [Rana J](https://github.com/rjur11)
+* [Emily Corcoran](https://github.com/Emily-Cathleen)
