@@ -51,15 +51,6 @@ The user has the ability to search for meals by ingredient, recipe name, or tags
 Find the Turing project spec [HERE](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
 We utilized github projects to manage the workflow of this application, that board can be found [HERE](https://github.com/Emily-Cathleen/whats-cookin/projects/1)
 
-## Future State
-*
-
-## Challenges
-*
-
-## Wins
-*
-
 ## Project Members
 This project was completed at the Turing School of Software & Design. Functionality and design by
 * [Susanna Cary](https://github.com/susannaopal)
