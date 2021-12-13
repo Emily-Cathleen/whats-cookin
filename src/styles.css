@@ -6,6 +6,8 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: 100%;
+  margin: 20px 20px 20px 20px;
+  border: 2px solid #050407;
   font-family: Georgia, Times, serif;
 }
 
@@ -97,6 +99,7 @@ html {
   /* justify-content: space-evenly; */
   flex-wrap: wrap;
   flex-direction: row;
+  background-color: #5e838be8;
 }
 
 .recipe-card {
@@ -104,7 +107,7 @@ html {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #fbeb9ca6;
+  background-color: #7a9997;
   margin: 10px 10px 10px 10px;
   border-radius: 1%;
   padding: 18px 10px 10px 10px;
@@ -162,6 +165,13 @@ html {
 
 .recipe-info {
   margin: 10px 10px 10px 10px;
+}
+
+.favorite-recipe-page {
+  display: flex;
+  flex-direction: column;
+
+  border: 2px solid blue;
 }
 
 
