@@ -11,11 +11,17 @@ Find the live link [HERE]()
 
 ## Home Page View
 
-When the page loads, there is a random user generated whos name appears in the header. From the main page, the user will scroll through a list of recipes and have the option to favorite recipes. The user can add and remove recipes to thier favorites list. 
-The user can view the recipe card by clicking on the title of the recipe. The recipe card features the ingredients, directions, and estimated total cost for each recipe. 
+When the page loads, there is a random user generated whos name appears in the header. From the main page, the user will scroll through a list of recipes and have the option to favorite recipes. 
 
 ![](https://media.giphy.com/media/ZViOXCc93bAggPAn4u/giphy.gif)
 
+## Adding and Removing Favorites 
+
+The user can add and remove recipes to thier favorites list by clicking the "Favorite" button. 
+The user can view the recipe card by clicking on the title of the recipe. The recipe card features the ingredients, directions, and estimated total cost for each recipe. From the recipe card page, the user can add/remove the recipe from thier favorites list or add to their shopping cart. 
+The "Home" button will navigate back to the main page. 
+
+![](https://media.giphy.com/media/DHJSalZSwyFh0ZOXrK/giphy.gif)
 
 ## Search and Filter Functionality 
 
@@ -40,9 +46,10 @@ The user has the ability to search for meals by ingredient, recipe name, or tags
 * Chai
 * Node.js
 
-## Architecture 
+## Architecture & Planning
 
 Find the Turing project spec [HERE](https://frontend.turing.edu/projects/whats-cookin-part-one.html)
+We utilized github projects to manage the workflow of this application, that board can be found [HERE](https://github.com/Emily-Cathleen/whats-cookin/projects/1)
 
 ## Future State
 *
