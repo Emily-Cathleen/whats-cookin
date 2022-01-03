@@ -51,6 +51,6 @@ We utilized github projects to manage the workflow of this application, that boa
 
 ## Project Members
 This project was completed at the Turing School of Software & Design. Functionality and design by
-* [Susanna Cary](https://github.com/susannaopal)
+* [Susanna Carey](https://github.com/susannaopal)
 * [Rana J](https://github.com/rjur11)
 * [Emily Corcoran](https://github.com/Emily-Cathleen)
