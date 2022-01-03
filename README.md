@@ -4,19 +4,18 @@ This application was created as a paired project for the Turing School of Softwa
 
 ## Abstract
 
-Welcome to What's Cookin'! A recipe and meal prepparation application. This application allows the user to peruse a list of tasty recipes and create a list of thier favorite ones. Feel free to add recipes and ingredients to your favorites page and shopping cart in order to plan your weekly meals.
-
+Welcome to What's Cookin'! A recipe and meal preparation application. This application allows the user to peruse a list of tasty recipes and create a list of their favorite ones. Feel free to add recipes and ingredients to your favorites page and shopping cart in order to plan your weekly meals.
 
 
 ## Home Page View
 
-When the page loads, there is a random user generated whos name appears in the header. From the main page, the user will scroll through a list of recipes and have the option to favorite recipes. 
+When the page loads, there is a random user generated whose name appears in the header. From the main page, the user will scroll through a list of recipes and have the option to favorite recipes. 
 
 ![](https://media.giphy.com/media/ZViOXCc93bAggPAn4u/giphy.gif)
 
 ## Adding and Removing Favorites 
 
-The user can add and remove recipes to thier favorites list by clicking the "Favorite" button. 
+The user can add and remove recipes to their favorites list by clicking the "Favorite" button. 
 The user can view the recipe card by clicking on the title of the recipe. The recipe card features the ingredients, directions, and estimated total cost for each recipe. From the recipe card page, the user can add/remove the recipe from thier favorites list or add to their shopping cart. 
 The "Home" button will navigate back to the main page. 
 
@@ -24,7 +23,7 @@ The "Home" button will navigate back to the main page.
 
 ## Search and Filter Functionality 
 
-The user has the ability to search for meals by ingredient, recipe name, or tags. The page will filter out recipes according to what the user inputs as thier criteria. 
+The user has the ability to search for meals by ingredient, recipe name, or tags. The page will filter out recipes according to what the user inputs as their criteria. 
 
 ![](https://media.giphy.com/media/mR3rPp1FSuVU5btjqD/giphy.gif)
 
