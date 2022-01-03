@@ -6,7 +6,6 @@ This application was created as a paired project for the Turing School of Softwa
 
 Welcome to What's Cookin'! A recipe and meal prepparation application. This application allows the user to peruse a list of tasty recipes and create a list of thier favorite ones. Feel free to add recipes and ingredients to your favorites page and shopping cart in order to plan your weekly meals.
 
-Find the live link [HERE]()
 
 
 ## Home Page View
