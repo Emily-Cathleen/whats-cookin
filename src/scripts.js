@@ -71,7 +71,7 @@ async function loadAPIs() {
 
   cookbook = new Cookbook(recipes);
   renderRecipePages();
-};
+}
 
 function getCookbookRecipes() {
   if (nameSearchInput.value || ingredientSearchInput.value) {
