@@ -1,12 +1,26 @@
+function createDataEntry(pantryEntry, ingredientList) {
+  const ingredientEntry = ingredientList.find((ingredientEntry) => {
+    return ingredientEntry.id === pantryEntry.ingredient;
+  });
+  return {
+    id: ingredientEntry.id,
+    name: ingredientEntry.name,
+    amount: pantryEntry.amount,
+  };
+}
+
 class Pantry {
   constructor(pantryList, ingredientList) {
     this.ingredientList = ingredientList;
-    // this.data = pantryList.map(...);
+    this.pantryList = pantryList;
+    this.data = pantryList.map((item) => {
+      return createDataEntry(item, ingredientList);
+    });
   }
   // getMissingIngredients(){}
   // cookAMeal(){}
   // getAllIngredients()
-  // addIngredients()
+  // addIngredients(id, amount)
 }
 
 module.exports = Pantry;
