@@ -43,7 +43,11 @@ describe("Ingredient", () => {
 
   it("should have an amount", () => {
     expect(ingredient.amount).to.equal(2);
-  })
+  });
+
+  it("should have an unit", () => {
+    expect(ingredient.unit).to.equal('tsp');
+  });
 
   it("should be ale to calculate ingredient cost", () => {
     expect(ingredient.calculateCost()).to.equal(284);

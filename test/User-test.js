@@ -95,6 +95,11 @@ describe("User", () => {
     expect(user2.name).to.equal(undefined);
   });
 
+  it("should have a first name", () => {
+    expect(user1.getFirstName()).to.equal("Saige");
+  });
+
+
   it("should have an id", () => {
     expect(user1.id).to.equal(1);
   });
