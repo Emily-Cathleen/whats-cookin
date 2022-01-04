@@ -39,8 +39,11 @@ describe("Ingredient", () => {
   it("should have an estimated cost in cents", () => {
     expect(ingredient.estimatedCostInCents).to.equal(142);
     expect(ingredient2.estimatedCostInCents).to.equal(undefined);
-
   });
+
+  it("should have an amount", () => {
+    expect(ingredient.amount).to.equal(2);
+  })
 
   it("should be ale to calculate ingredient cost", () => {
     expect(ingredient.calculateCost()).to.equal(284);
