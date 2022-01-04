@@ -150,7 +150,7 @@ function populateRecipes(element, getRecipes) {
     .map((recipe) => {
       const isFavorite = user.favoriteRecipes.includes(recipe);
       return `
-    <article class="recipe-card">
+      <article class="recipe-card">
         <img class="recipe-image" src="${recipe.image}" alt="Image of ${
         recipe.name
       }" width=400>
@@ -166,8 +166,8 @@ function populateRecipes(element, getRecipes) {
       </article>`;
     })
     .join("");
-  element.querySelectorAll(".recipe-title").forEach((recipeTitle) => {
-    recipeTitle.addEventListener("click", (event) => {
+  element.querySelectorAll(".recipe-card").forEach((recipeCard) => {
+    recipeCard.addEventListener("click", (event) => {
       const recipeId = parseInt(event.target.dataset.recipeId);
 
       const selectedRecipe = recipes.find(({ id }) => id === recipeId);
