@@ -33,7 +33,7 @@ describe("Pantry", () => {
       quantity: { amount: 2, unit: "leaves" },
     });
     ingredientList = [ingredient1, ingredient2];
-    pantry1 = new Pantry(user1.pantry, ingredientList);
+    pantry1 = new Pantry([user1.pantry], ingredientList);
   });
   it("should be a function", () => {
     expect(Pantry).to.be.a("function");
@@ -41,5 +41,11 @@ describe("Pantry", () => {
 
   it("should be an instance of Pantry", () => {
     expect(pantry1).to.be.an.instanceOf(Pantry);
+  });
+  it("should accept a pantry list", () => {
+    expect(pantry1.pantryList).to.deep.equal([
+      { ingredient: 11297, amount: 4 },
+      { ingredient: 20081, amount: 5 },
+    ]);
   });
 });
