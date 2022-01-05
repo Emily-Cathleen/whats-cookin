@@ -9,7 +9,7 @@ import { fetchRecipes } from "./apiCalls.js";
 
 /* QUERY SELECTORS */
 
-const recipeTitle = document.querySelector("#openRecipe");
+// const recipeTitle = document.querySelector("#openRecipe");
 const homePage = document.querySelector(".home-page");
 const recipeView = document.querySelector(".recipe-view");
 const homeButton = document.querySelector(".home-button");
@@ -18,12 +18,12 @@ const favoriteRecipesPageButton = document.querySelector(
 );
 const recipesToCookButton = document.querySelector(".recipes-to-cook-button");
 const recipeCard = document.querySelector(".recipe-card");
-const filterBar = document.querySelector(".filter-bar");
+// const filterBar = document.querySelector(".filter-bar");
 const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
-const favoriteButtons = document.querySelectorAll(".favorite-button");
+// const favoriteButtons = document.querySelectorAll(".favorite-button");
 const recipesToCookPage = document.querySelector(".recipes-to-cook-page");
 const userName = document.querySelector(".user-name");
 
@@ -49,6 +49,9 @@ function displayElements(elementsToDisplay) {
     .filter((element) => !elementsToDisplay.includes(element))
     .forEach(addHidden);
 }
+
+
+
 
 async function loadAPIs() {
   let usersData = await fetchUsers();
@@ -150,8 +153,8 @@ function populateRecipes(element, getRecipes) {
     .map((recipe) => {
       const isFavorite = user.favoriteRecipes.includes(recipe);
       return `
-      <article class="recipe-card">
-        <img class="recipe-image" src="${recipe.image}" alt="Image of ${
+      <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'> 
+        <img class="recipe-image" data-recipe-id='${recipe.id}' src="${recipe.image}" alt="Image of ${
         recipe.name
       }" width=400>
         <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
@@ -161,13 +164,14 @@ function populateRecipes(element, getRecipes) {
           <button class="fav-button-${recipe.id}">${
         isFavorite ? "Remove from " : "Add to "
       }Favorites</button>
-          <p>Tags: ${recipe.tags.join(", ")}</p>
+          <p data-recipe-id="${recipe.id}">Tags: ${recipe.tags.join(", ")}</p>
         </div>
       </article>`;
     })
     .join("");
   element.querySelectorAll(".recipe-card").forEach((recipeCard) => {
     recipeCard.addEventListener("click", (event) => {
+      console.log('event.target', event.target);
       const recipeId = parseInt(event.target.dataset.recipeId);
 
       const selectedRecipe = recipes.find(({ id }) => id === recipeId);
@@ -183,6 +187,7 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
+
 
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
