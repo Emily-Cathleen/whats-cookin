@@ -3,9 +3,8 @@ import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 import User from "./classes/User.js";
-import { fetchUsers } from "./apiCalls.js";
-import { fetchIngredients } from "./apiCalls.js";
-import { fetchRecipes } from "./apiCalls.js";
+import { fetchUsers, fetchIngredients, fetchRecipes } from "./apiCalls.js";
+
 
 /* QUERY SELECTORS */
 
@@ -51,30 +50,48 @@ function displayElements(elementsToDisplay) {
 }
 
 
+// function loadAPIs() {
+//   Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()])
+//   .then(data => { 
+//      let usersData = new User(data[0])
+//       let ingredientsData = new Ingredient(data[1]) 
+//       let recipesData = (data[2])
+//   })
+//   // .catch((error) => console.log(error))
+// }
 
 
-async function loadAPIs() {
-  let usersData = await fetchUsers();
-  let ingredientsData = await fetchIngredients();
-  let recipesData = await fetchRecipes();
-  const randomUser = Math.round(Math.random() * usersData.length);
-  user = new User(usersData[randomUser]);
-  userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
-  recipes = recipesData.map(
-    ({ id, image, ingredients, instructions, name, tags }) => {
-      const ingredientObjects = ingredients.map(({ id, quantity }) => {
-        const { name, estimatedCostInCents } = ingredientsData.find(
-          (ingredientData) => ingredientData.id === id
-        );
-        return new Ingredient({ id, name, estimatedCostInCents, quantity });
-      });
-      return new Recipe(id, image, ingredientObjects, instructions, name, tags);
-    }
-  );
 
-  cookbook = new Cookbook(recipes);
-  renderRecipePages();
+ function loadAPIs() {
+  Promise.all([fetchUsers, fetchIngredients, fetchRecipes])
+  .then(data => { 
+    let usersData = data[0]
+    let ingredientsData = data[1]
+    let recipesData = data[2]
+    //instiating classes
+    //window onload functions 
+    //whatever is on pageload for data 
+  })
+  // .catch((error) => console.log(error));
 }
+
+//BELOW NEEDS TO BE PUT INTO A FUNCTION  
+//const randomUser = Math.round(Math.random() * usersData.length);
+// user = new User(usersData[randomUser]);
+// userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
+// recipes = recipesData.map(
+//   ({ id, image, ingredients, instructions, name, tags }) => {
+//     const ingredientObjects = ingredients.map(({ id, quantity }) => {
+//       const { name, estimatedCostInCents } = ingredientsData.find(
+//         (ingredientData) => ingredientData.id === id
+//       );
+//       return new Ingredient({ id, name, estimatedCostInCents, quantity });
+//     });
+//     return new Recipe(id, image, ingredientObjects, instructions, name, tags);
+//   }
+// );
+// cookbook = new Cookbook(recipes);
+// renderRecipePages();
 
 function getCookbookRecipes() {
   if (nameSearchInput.value || ingredientSearchInput.value) {
