@@ -171,7 +171,6 @@ function populateRecipes(element, getRecipes) {
     .join("");
   element.querySelectorAll(".recipe-card").forEach((recipeCard) => {
     recipeCard.addEventListener("click", (event) => {
-      console.log('event.target', event.target);
       const recipeId = parseInt(event.target.dataset.recipeId);
 
       const selectedRecipe = recipes.find(({ id }) => id === recipeId);
