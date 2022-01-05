@@ -56,6 +56,24 @@ class User {
     });
     return filteredIngredient;
   }
+
+checkPantry(recipe) {
+  const comparedIngredients = [];
+  recipe.ingredients.forEach(recipeIngredient => {
+    this.pantry.forEach(userPantryIngredient => {
+      if (recipeIngredient.id === userPantryIngredient.ingredient && userPantryIngredient.amount >= recipeIngredient.quantity.amount) {
+        comparedIngredients.push(recipeIngredient)
+      }
+
+    })
+  })
+}
+
+
+//for each ingredient in our recipe, we want to check it against
+//each ingredient in our pantryList
+//checking recipe ingredient against pantry contents.
+
 }
 
 module.exports = User;
