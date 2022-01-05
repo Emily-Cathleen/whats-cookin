@@ -107,7 +107,8 @@ html {
   box-shadow: 10px 10px 5px #541d1a91;
 }
 
-.recipe-title:hover, {
+.recipe-title:hover,
+.recipe-card {
   cursor: pointer;
 }
 

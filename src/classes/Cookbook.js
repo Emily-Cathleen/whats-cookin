@@ -1,9 +1,8 @@
 class Cookbook {
   constructor(recipes) {
     this.recipes = recipes;
-    this.matchingRecipes;
-    this.matchingTags = [];
   }
+  
   filterTags(selectedTags) {
     const filteredRecipesByTag = this.recipes.filter((recipe) => {
       return selectedTags.every((selectedTag) =>
