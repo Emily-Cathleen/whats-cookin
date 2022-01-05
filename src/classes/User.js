@@ -61,12 +61,12 @@ checkPantry(recipe) {
   const comparedIngredients = [];
   recipe.ingredients.forEach(recipeIngredient => {
     this.pantry.forEach(userPantryIngredient => {
-      if (recipeIngredient.id === userPantryIngredient.ingredient && userPantryIngredient.amount >= recipeIngredient.quantity.amount) {
-        comparedIngredients.push(recipeIngredient)
+      if (recipeIngredient.id === userPantryIngredient.ingredient && userPantryIngredient.amount >= recipeIngredient.amount) {
+        comparedIngredients.push(recipeIngredient.id)
       }
-
     })
   })
+  return recipe.ingredients.length === comparedIngredients.length
 }
 
 

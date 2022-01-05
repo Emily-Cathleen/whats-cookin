@@ -19,9 +19,10 @@ describe("User", () => {
       name: "Saige O'Kon",
       id: 1,
       pantry: [
-        { ingredient: 11297, amount: 4 },
-        { ingredient: 1082047, amount: 10 },
-        { ingredient: 20081, amount: 5 },
+        { ingredient: 11297, amount: 15 },
+        { ingredient: 1082047, amount: 15 },
+        { ingredient: 20081, amount: 15 },
+        { ingredient: 18372, amount: 15 },
       ],
     });
     ingredient1 = new Ingredient({
@@ -106,9 +107,11 @@ describe("User", () => {
 
   it("should have a pantry", () => {
     expect(user1.pantry).to.deep.equal([
-      { ingredient: 11297, amount: 4 },
-      { ingredient: 1082047, amount: 10 },
-      { ingredient: 20081, amount: 5 },
+      { ingredient: 11297, amount: 15 },
+      { ingredient: 1082047, amount: 15 },
+      { ingredient: 20081, amount: 15 },
+      { ingredient: 18372, amount: 15 },
+
     ]);
     expect(user2.pantry).to.deep.equal(undefined);
   });
@@ -160,6 +163,7 @@ describe("User", () => {
       recipe2,
     ]);
   });
+
   it("should be able to filter favorite recipes by name", () => {
     user1.addFavoriteRecipe(recipe1);
     user1.addFavoriteRecipe(recipe2);
@@ -167,4 +171,9 @@ describe("User", () => {
       recipe2,
     ]);
   });
+
+it("should compare ingredients in recipe with with ingedients in user pantry", () => {
+  expect(user1.checkPantry(recipe1)).to.equal(true)
+});
+
 });
