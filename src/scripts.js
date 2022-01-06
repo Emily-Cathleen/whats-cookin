@@ -1,5 +1,6 @@
 /* eslint-disable max-len */
-import "./styles.css";
+import "./styles/index.scss";
+// import "./styles.css";
 import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
@@ -56,7 +57,7 @@ function displayElements(elementsToDisplay) {
 
 function loadAPIs() {
   Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()])
-    .then(data => { 
+    .then(data => {
       usersData = data[0]
       ingredientsData = data[1]
       recipesData = data[2]
@@ -157,7 +158,7 @@ function populateRecipes(element, getRecipes) {
     .map((recipe) => {
       const isFavorite = user.favoriteRecipes.includes(recipe);
       return `
-      <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'> 
+      <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'>
         <img class="recipe-image" data-recipe-id='${recipe.id}' src="${recipe.image}" alt="Image of ${
         recipe.name
       }" width=400>
@@ -284,5 +285,3 @@ recipesToCookButton.addEventListener("click", showRecipesToCookPage);
 favoriteRecipesPageButton.addEventListener("click", showFavoritesPage);
 nameSearchInput.addEventListener("input", searchRecipes);
 ingredientSearchInput.addEventListener("input", searchRecipes);
-
-
