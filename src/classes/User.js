@@ -5,6 +5,7 @@ class User {
     this.name = userData.name;
     this.id = userData.id;
     this.pantry = userData.pantry;
+    this.neededIngredients = [];
     this.favoriteRecipes = [];
     this.recipesToCook = [];
   }
@@ -57,31 +58,49 @@ class User {
     return filteredIngredient;
   }
 
-checkPantry(recipe) {
-  const comparedIngredients = [];
-  recipe.ingredients.forEach(recipeIngredient => {
-    this.pantry.forEach(userPantryIngredient => {
-      if (recipeIngredient.id === userPantryIngredient.ingredient && userPantryIngredient.amount >= recipeIngredient.amount) {
-        comparedIngredients.push(recipeIngredient.id)
-      }
+  checkPantry(recipe) {
+    const comparedIngredients = [];
+    recipe.ingredients.forEach((recipeIngredient) => {
+      this.pantry.forEach((userPantryIngredient) => {
+        if (
+          recipeIngredient.id === userPantryIngredient.ingredient &&
+          userPantryIngredient.amount >= recipeIngredient.amount
+        ) {
+          comparedIngredients.push(recipeIngredient.id);
+        }
+      });
     });
-  });
-  return recipe.ingredients.length === comparedIngredients.length
+    return recipe.ingredients.length === comparedIngredients.length;
+  }
+
+  returnNeededIngredients(recipe) {
+    const result = recipe.ingredients.reduce(
+      (neededIngredients, recipeIngredient) => {
+        const inc = recipeIngredient.find(
+          recipeIngredient.id === this.pantry.ingredient
+        );
+        if (!inc) {
+          neededIngredients.push({
+            id: recipeIngredient.id,
+            name: recipeIngredient.name,
+            difference: recipeIngredient.amount,
+            unit: recipeIngredient.quantity.unit,
+          });
+        } else if (inc && recipeIngredient.amount > this.pantry.amount) {
+          neededIngredients.push({
+            id: recipeIngredient.id,
+            name: recipeIngredient.name,
+            difference: recipeIngredient.amount - this.pantry.amount,
+            unit: recipeIngredient.quantity.unit,
+          });
+        }
+        return neededIngredients;
+      },
+      []
+    );
+    this.neededIngredients = result;
+    return result;
+  }
 }
-
-returnNeededIngredients(recipe) {
-  const result = recipe.ingredients.reduce((neededIngredients, recipeIngredient) => {
-    this.pantry.forEach(userPantryIngredient => {
-      if(recipe.ingredients){
-
-      }
-
-    })
-    return neededIngredients
-  }, {})
-  return result
-}
-
-};
 
 module.exports = User;
