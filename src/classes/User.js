@@ -56,6 +56,32 @@ class User {
     });
     return filteredIngredient;
   }
+
+checkPantry(recipe) {
+  const comparedIngredients = [];
+  recipe.ingredients.forEach(recipeIngredient => {
+    this.pantry.forEach(userPantryIngredient => {
+      if (recipeIngredient.id === userPantryIngredient.ingredient && userPantryIngredient.amount >= recipeIngredient.amount) {
+        comparedIngredients.push(recipeIngredient.id)
+      }
+    });
+  });
+  return recipe.ingredients.length === comparedIngredients.length
 }
+
+returnNeededIngredients(recipe) {
+  const result = recipe.ingredients.reduce((neededIngredients, recipeIngredient) => {
+    this.pantry.forEach(userPantryIngredient => {
+      if(recipe.ingredients){
+
+      }
+
+    })
+    return neededIngredients
+  }, {})
+  return result
+}
+
+};
 
 module.exports = User;
