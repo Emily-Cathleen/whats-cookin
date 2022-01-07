@@ -10,48 +10,51 @@ const domUpdates = {
       ".user-name"
     ).innerText = `Hello, ${currUser.getFirstName()}! What do you want to cook today?`;
   },
-  //     userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`},
   //     addHidden(element) {element.classList.add("hidden")},
   //     removeHidden(element) {element.classList.remove("hidden")},
-  //     function populateRecipes(element, getRecipes) {
-  //         const recipes = getRecipes();
-  //         element.innerHTML = recipes
-  //           .map((recipe) => {
-  //             const isFavorite = user.favoriteRecipes.includes(recipe);
-  //             return `
-  //             <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'>
-  //               <img class="recipe-image" data-recipe-id='${recipe.id}' src="${
-  //               recipe.image
-  //             }" alt="Image of ${recipe.name}" width=400>
-  //               <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
-  //               recipe.name
-  //             }</h1>
-  //               <div>
-  //                 <button class="fav-button-${recipe.id}">${
-  //               isFavorite ? "Remove from " : "Add to "
-  //             }Favorites</button>
-  //                 <p data-recipe-id="${recipe.id}">Tags: ${recipe.tags.join(", ")}</p>
-  //               </div>
-  //             </article>`;
-  //           })
-  //           .join("");
-  //         element.querySelectorAll(".recipe-card").forEach((recipeCard) => {
-  //           recipeCard.addEventListener("click", (event) => {
-  //             const recipeId = parseInt(event.target.dataset.recipeId);
+  populateRecipes(element, getRecipes) {
+    const recipes = getRecipes();
+    element.innerHTML = recipes
+      .map((recipe) => {
+        const isFavorite = user.favoriteRecipes.includes(recipe);
+        return `
+              <article class="recipe-card recipe-title" data-recipe-id='${
+                recipe.id
+              }'>
+                <img class="recipe-image" data-recipe-id='${recipe.id}' src="${
+          recipe.image
+        }" alt="Image of ${recipe.name}" width=400>
+                <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
+          recipe.name
+        }</h1>
+                <div>
+                  <button class="fav-button-${recipe.id}">${
+          isFavorite ? "Remove from " : "Add to "
+        }Favorites</button>
+                  <p data-recipe-id="${recipe.id}">Tags: ${recipe.tags.join(
+          ", "
+        )}</p>
+                </div>
+              </article>`;
+      })
+      .join("");
+    element.querySelectorAll(".recipe-card").forEach((recipeCard) => {
+      recipeCard.addEventListener("click", (event) => {
+        const recipeId = parseInt(event.target.dataset.recipeId);
 
-  //             const selectedRecipe = recipes.find(({ id }) => id === recipeId);
-  //             if (selectedRecipe) {
-  //               displayRecipeView(selectedRecipe);
-  //             }
-  //           });
-  //         });
-  //         recipes.forEach((recipe) => {
-  //           const favButton = element.querySelectorAll(`.fav-button-${recipe.id}`);
-  //           favButton.forEach((button) => {
-  //             button.addEventListener("click", clickFavoriteButton(recipe));
-  //           });
-  //         });
-  //       },
+        const selectedRecipe = recipes.find(({ id }) => id === recipeId);
+        if (selectedRecipe) {
+          displayRecipeView(selectedRecipe);
+        }
+      });
+    });
+    recipes.forEach((recipe) => {
+      const favButton = element.querySelectorAll(`.fav-button-${recipe.id}`);
+      favButton.forEach((button) => {
+        button.addEventListener("click", clickFavoriteButton(recipe));
+      });
+    });
+  },
   //        showRecipeCard(selectedRecipe) {
   //         const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   //         const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
@@ -114,8 +117,5 @@ const domUpdates = {
   //           });
   //       }
 };
-
-// //function domUpdates.show(view)
-// //function domUpdates.hide(view)
 
 export default domUpdates;
