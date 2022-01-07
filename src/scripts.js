@@ -48,13 +48,13 @@ let recipesData;
 let randomUser;
 
 /* FUNCTIONS */
-// REPLACE WITH DOMUPDATES
-// function displayElements(elementsToDisplay) {
-//   elementsToDisplay.forEach(removeHidden);
-//   hidableElements
-//     .filter((element) => !elementsToDisplay.includes(element))
-//     .forEach(addHidden);
-// }
+// domUpdates.hide(elementsToDisplay);
+function displayElements(elementsToDisplay) {
+  elementsToDisplay.forEach(removeHidden);
+  hidableElements
+    .filter((element) => !elementsToDisplay.includes(element))
+    .forEach(addHidden);
+}
 
 function loadAPIs() {
   Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()]).then(
@@ -64,9 +64,7 @@ function loadAPIs() {
       recipesData = data[2];
       randomUser = Math.round(Math.random() * usersData.length);
       user = new User(usersData[randomUser]);
-      // REPLACE WITH DOMUPDATES
       domUpdates.userGreeting(user);
-      // userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
       recipes = recipesData.map(
         ({ id, image, ingredients, instructions, name, tags }) => {
           const ingredientObjects = ingredients.map(({ id, quantity }) => {
@@ -87,7 +85,7 @@ function loadAPIs() {
       );
       cookbook = new Cookbook(recipes);
       // REPLACE WITH DOMUPDATES
-      // renderRecipePages();
+      renderRecipePages();
     }
   );
 }
@@ -139,16 +137,8 @@ function filterByTags() {
   ingredientSearchInput.value = "";
   renderRecipePages();
 }
-
-function addHidden(element) {
-  element.classList.add("hidden");
-}
-
-function removeHidden(element) {
-  element.classList.remove("hidden");
-}
-
 function displayRecipeView(selectedRecipe) {
+  // domUpdates.show(recipeView, homeButton, favoriteRecipesPageButton, recipesToCookButton)
   displayElements([
     recipeView,
     homeButton,
@@ -287,6 +277,14 @@ function clickFavoriteButton(recipe) {
     }
     renderRecipePages();
   };
+}
+
+function addHidden(element) {
+  element.classList.add("hidden");
+}
+
+function removeHidden(element) {
+  element.classList.remove("hidden");
 }
 
 /* Event Listeners */

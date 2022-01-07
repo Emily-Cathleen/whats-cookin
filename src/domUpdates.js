@@ -2,11 +2,8 @@ const domUpdates = {
   hide(...views) {
     views.forEach.add("hidden");
   },
-  displayElements(elementsToDisplay) {
-    elementsToDisplay.forEach(removeHidden);
-    hidableElements
-      .filter((element) => !elementsToDisplay.includes(element))
-      .forEach(addHidden);
+  show(...views) {
+    views.forEach.remove("hidden");
   },
   userGreeting(currUser) {
     document.querySelector(
