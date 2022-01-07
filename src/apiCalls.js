@@ -5,9 +5,7 @@ export const fetchUsers = () => {
 };
 
 export const fetchIngredients = () => {
-  return fetch(
-    "http://localhost:3001/api/v1/ingredients	"
-  )
+  return fetch("http://localhost:3001/api/v1/ingredients")
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };

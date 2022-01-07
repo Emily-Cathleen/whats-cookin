@@ -6,7 +6,7 @@ import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 import User from "./classes/User.js";
 import { fetchUsers, fetchIngredients, fetchRecipes } from "./apiCalls.js";
-
+import domUpdates from "./domUpdates.js";
 
 /* QUERY SELECTORS */
 
@@ -48,6 +48,7 @@ let recipesData;
 let randomUser;
 
 /* FUNCTIONS */
+// domUpdates.hide(elementsToDisplay);
 function displayElements(elementsToDisplay) {
   elementsToDisplay.forEach(removeHidden);
   hidableElements
@@ -56,14 +57,14 @@ function displayElements(elementsToDisplay) {
 }
 
 function loadAPIs() {
-  Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()])
-    .then(data => {
-      usersData = data[0]
-      ingredientsData = data[1]
-      recipesData = data[2]
+  Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()]).then(
+    (data) => {
+      usersData = data[0];
+      ingredientsData = data[1];
+      recipesData = data[2];
       randomUser = Math.round(Math.random() * usersData.length);
       user = new User(usersData[randomUser]);
-      userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
+      domUpdates.userGreeting(user);
       recipes = recipesData.map(
         ({ id, image, ingredients, instructions, name, tags }) => {
           const ingredientObjects = ingredients.map(({ id, quantity }) => {
@@ -72,14 +73,22 @@ function loadAPIs() {
             );
             return new Ingredient({ id, name, estimatedCostInCents, quantity });
           });
-          return new Recipe(id, image, ingredientObjects, instructions, name, tags);
+          return new Recipe(
+            id,
+            image,
+            ingredientObjects,
+            instructions,
+            name,
+            tags
+          );
         }
       );
       cookbook = new Cookbook(recipes);
+      // REPLACE WITH DOMUPDATES
       renderRecipePages();
-    })
+    }
+  );
 }
-
 
 function getCookbookRecipes() {
   if (nameSearchInput.value || ingredientSearchInput.value) {
@@ -128,16 +137,8 @@ function filterByTags() {
   ingredientSearchInput.value = "";
   renderRecipePages();
 }
-
-function addHidden(element) {
-  element.classList.add("hidden");
-}
-
-function removeHidden(element) {
-  element.classList.remove("hidden");
-}
-
 function displayRecipeView(selectedRecipe) {
+  // domUpdates.show(recipeView, homeButton, favoriteRecipesPageButton, recipesToCookButton)
   displayElements([
     recipeView,
     homeButton,
@@ -151,7 +152,7 @@ function returnHome() {
   displayElements([homePage, favoriteRecipesPageButton, recipesToCookButton]);
   renderRecipePages();
 }
-
+// REPLACE WITH DOMUPDATES
 function populateRecipes(element, getRecipes) {
   const recipes = getRecipes();
   element.innerHTML = recipes
@@ -159,9 +160,9 @@ function populateRecipes(element, getRecipes) {
       const isFavorite = user.favoriteRecipes.includes(recipe);
       return `
       <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'>
-        <img class="recipe-image" data-recipe-id='${recipe.id}' src="${recipe.image}" alt="Image of ${
-        recipe.name
-      }" width=400>
+        <img class="recipe-image" data-recipe-id='${recipe.id}' src="${
+        recipe.image
+      }" alt="Image of ${recipe.name}" width=400>
         <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
         recipe.name
       }</h1>
@@ -191,8 +192,7 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
-
-
+// REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
@@ -250,16 +250,18 @@ function showRecipeCard(selectedRecipe) {
     .querySelector(".add-to-recipes-to-cook-button")
     .addEventListener("click", () => {
       user.addRecipesToCook(selectedRecipe);
+      // REPLACE WITH DOMUPDATES
       renderRecipePages();
       showRecipeCard(selectedRecipe);
     });
 }
-
+// REPLACE WITH DOMUPDATES?
 function showFavoritesPage() {
   displayElements([favoriteRecipePage, homeButton, recipesToCookButton]);
   renderRecipePages();
 }
 
+// REPLACE WITH DOMUPDATES?
 function showRecipesToCookPage() {
   displayElements([recipesToCookPage, homeButton, favoriteRecipesPageButton]);
   renderRecipePages();
@@ -275,6 +277,14 @@ function clickFavoriteButton(recipe) {
     }
     renderRecipePages();
   };
+}
+
+function addHidden(element) {
+  element.classList.add("hidden");
+}
+
+function removeHidden(element) {
+  element.classList.remove("hidden");
 }
 
 /* Event Listeners */
