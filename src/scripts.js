@@ -6,7 +6,7 @@ import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 import User from "./classes/User.js";
 import { fetchUsers, fetchIngredients, fetchRecipes } from "./apiCalls.js";
-
+import domUpdates from "./domUpdates.js";
 
 /* QUERY SELECTORS */
 
@@ -56,11 +56,11 @@ function displayElements(elementsToDisplay) {
 }
 
 function loadAPIs() {
-  Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()])
-    .then(data => {
-      usersData = data[0]
-      ingredientsData = data[1]
-      recipesData = data[2]
+  Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()]).then(
+    (data) => {
+      usersData = data[0];
+      ingredientsData = data[1];
+      recipesData = data[2];
       randomUser = Math.round(Math.random() * usersData.length);
       user = new User(usersData[randomUser]);
       userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
@@ -72,14 +72,21 @@ function loadAPIs() {
             );
             return new Ingredient({ id, name, estimatedCostInCents, quantity });
           });
-          return new Recipe(id, image, ingredientObjects, instructions, name, tags);
+          return new Recipe(
+            id,
+            image,
+            ingredientObjects,
+            instructions,
+            name,
+            tags
+          );
         }
       );
       cookbook = new Cookbook(recipes);
       renderRecipePages();
-    })
+    }
+  );
 }
-
 
 function getCookbookRecipes() {
   if (nameSearchInput.value || ingredientSearchInput.value) {
@@ -159,9 +166,9 @@ function populateRecipes(element, getRecipes) {
       const isFavorite = user.favoriteRecipes.includes(recipe);
       return `
       <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'>
-        <img class="recipe-image" data-recipe-id='${recipe.id}' src="${recipe.image}" alt="Image of ${
-        recipe.name
-      }" width=400>
+        <img class="recipe-image" data-recipe-id='${recipe.id}' src="${
+        recipe.image
+      }" alt="Image of ${recipe.name}" width=400>
         <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
         recipe.name
       }</h1>
@@ -191,7 +198,6 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
-
 
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
