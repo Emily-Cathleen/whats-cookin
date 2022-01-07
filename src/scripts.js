@@ -48,12 +48,13 @@ let recipesData;
 let randomUser;
 
 /* FUNCTIONS */
-function displayElements(elementsToDisplay) {
-  elementsToDisplay.forEach(removeHidden);
-  hidableElements
-    .filter((element) => !elementsToDisplay.includes(element))
-    .forEach(addHidden);
-}
+// REPLACE WITH DOMUPDATES
+// function displayElements(elementsToDisplay) {
+//   elementsToDisplay.forEach(removeHidden);
+//   hidableElements
+//     .filter((element) => !elementsToDisplay.includes(element))
+//     .forEach(addHidden);
+// }
 
 function loadAPIs() {
   Promise.all([fetchUsers(), fetchIngredients(), fetchRecipes()]).then(
@@ -63,7 +64,9 @@ function loadAPIs() {
       recipesData = data[2];
       randomUser = Math.round(Math.random() * usersData.length);
       user = new User(usersData[randomUser]);
-      userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
+      // REPLACE WITH DOMUPDATES
+      domUpdates.userGreeting(user);
+      // userName.innerHTML = `<h3 class="user-name">Hello, ${user.getFirstName()}! What do you want to cook today?</h3>`;
       recipes = recipesData.map(
         ({ id, image, ingredients, instructions, name, tags }) => {
           const ingredientObjects = ingredients.map(({ id, quantity }) => {
@@ -83,7 +86,8 @@ function loadAPIs() {
         }
       );
       cookbook = new Cookbook(recipes);
-      renderRecipePages();
+      // REPLACE WITH DOMUPDATES
+      // renderRecipePages();
     }
   );
 }
@@ -158,7 +162,7 @@ function returnHome() {
   displayElements([homePage, favoriteRecipesPageButton, recipesToCookButton]);
   renderRecipePages();
 }
-
+// REPLACE WITH DOMUPDATES
 function populateRecipes(element, getRecipes) {
   const recipes = getRecipes();
   element.innerHTML = recipes
@@ -198,7 +202,7 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
-
+// REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
@@ -256,16 +260,18 @@ function showRecipeCard(selectedRecipe) {
     .querySelector(".add-to-recipes-to-cook-button")
     .addEventListener("click", () => {
       user.addRecipesToCook(selectedRecipe);
+      // REPLACE WITH DOMUPDATES
       renderRecipePages();
       showRecipeCard(selectedRecipe);
     });
 }
-
+// REPLACE WITH DOMUPDATES?
 function showFavoritesPage() {
   displayElements([favoriteRecipePage, homeButton, recipesToCookButton]);
   renderRecipePages();
 }
 
+// REPLACE WITH DOMUPDATES?
 function showRecipesToCookPage() {
   displayElements([recipesToCookPage, homeButton, favoriteRecipesPageButton]);
   renderRecipePages();
