@@ -15,3 +15,22 @@ export const fetchRecipes = () => {
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
+
+//POST request 
+
+export const buyIngredients = (userID, ingredientID, ingredientModification) => {
+  return fetch("http://localhost:3001/api/v1/users", {
+    method: 'POST',
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      userID: userID,
+      ingredientID: ingredientID,
+      ingredientModification: ingredientModification
+    });
+    })
+    .then((response) => response.json())
+    .catch((error) => console.log(error));
+};
