@@ -178,4 +178,5 @@ describe("User", () => {
     expect(user1.returnNeededIngredients(recipe1)).to.deep.equal([]);
   });
   // Add test to show missing ingredients
+  //Add test to show cooked/used ingredients 
 });
