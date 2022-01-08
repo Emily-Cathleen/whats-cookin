@@ -176,6 +176,8 @@ it("should compare ingredients in recipe with with ingedients in user pantry", (
   expect(user1.checkPantry(recipe1)).to.equal(true)
 });
 
-
+it("should return missing ingredients for a recipe", () => {
+  expect(user1.returnNeededIngredients(recipe1)).to.deep.equal([])
+})
 
 });

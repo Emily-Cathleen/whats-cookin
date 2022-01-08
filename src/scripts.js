@@ -62,7 +62,7 @@ function loadAPIs() {
       usersData = data[0];
       ingredientsData = data[1];
       recipesData = data[2];
-      randomUser = Math.round(Math.random() * usersData.length);
+      randomUser = Math.floor(Math.random() * usersData.length);
       user = new User(usersData[randomUser]);
       domUpdates.userGreeting(user);
       recipes = recipesData.map(
@@ -196,6 +196,21 @@ function populateRecipes(element, getRecipes) {
 function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
+  let neededRecipesDisplay = "";
+      //for DOMUPDATES: the thing that changes the paragraph tag that changes if we have the ingr or not
+  if(user.checkPantry(selectedRecipe)){
+   neededRecipesDisplay = `<p>You're ready to cook!</p>`
+    //post to remove igr from our pantry when we click the button to cook it
+    //logic for disabling button to  buy ingred
+  } else {
+  const neededIngredients = user.returnNeededIngredients(selectedRecipe)
+    neededRecipesDisplay = neededIngredients.map(ingredient => {
+      return `<p>${ingredient}</p>`
+    }).join("")
+    //forEach ===> post call? buy ingrButton (cannot click the button to cook until then; once bought then it can be selected to cook )
+    //run return needed ingred method
+    //returns array of needed ingr
+  }
 
   recipeView.innerHTML = `
     <div>
@@ -210,6 +225,8 @@ function showRecipeCard(selectedRecipe) {
       }>${
     inRecipesToCook ? "Already in List" : "Add to Recipes to Cook"
   }</button>
+    <button class="cook-recipe-button" ${user.checkPantry(selectedRecipe) ? "" : "disabled"}>Cook Recipe </button>
+    <button class="buy-ingredients-button" ${user.checkPantry(selectedRecipe) ? "disabled" : ""}>Buy Ingredients </button>
     </div>
     <section class="recipe-info">
       <div>
@@ -229,6 +246,8 @@ function showRecipeCard(selectedRecipe) {
         <h3>Total Cost of Ingredients: $${(
           selectedRecipe.getCostOfIngredients() / 100
         ).toFixed(2)}</h3>
+      </div>
+      <div class="needed-ingredients"> ${neededRecipesDisplay}
       </div>
       <div>
         <h1 class="">Recipe Instructions</h1>
