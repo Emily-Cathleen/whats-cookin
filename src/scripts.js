@@ -261,6 +261,7 @@ function createRecipeInfoSection(selectedRecipe) {
 }
 
 function createRecipeCard(selectedRecipe) {
+  recipeView.innerHTML = "";
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
 

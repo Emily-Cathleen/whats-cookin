@@ -76,9 +76,9 @@ class User {
   returnNeededIngredients(recipe) {
     const result = recipe.ingredients.reduce(
       (neededIngredients, recipeIngredient) => {
-        const inc = recipeIngredient.find(
-          recipeIngredient.id === this.pantry.ingredient
-        );
+        const inc = this.pantry.find((ingredient) => {
+          return recipeIngredient.id === ingredient;
+        });
         if (!inc) {
           neededIngredients.push({
             id: recipeIngredient.id,
