@@ -29,8 +29,8 @@ export const buyIngredients = (userID, ingredientID, ingredientModification) => 
       userID: userID,
       ingredientID: ingredientID,
       ingredientModification: ingredientModification
-    });
-    })
+    }),
+  })
     .then((response) => response.json())
     .catch((error) => console.log(error));
 };
