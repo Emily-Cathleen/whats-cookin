@@ -192,26 +192,18 @@ function populateRecipes(element, getRecipes) {
     });
   });
 }
-// REPLACE WITH DOMUPDATES
-function showRecipeCard(selectedRecipe) {
+
+function createButton(classList, text) {
+  const button = document.createElement("button");
+  classList.forEach((className) => {
+    button.classList.add(className);
+  });
+  button.innerText = text;
+}
+
+function createRecipeCard() {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
-  let neededRecipesDisplay = "";
-      //for DOMUPDATES: the thing that changes the paragraph tag that changes if we have the ingr or not
-  if(user.checkPantry(selectedRecipe)){
-   neededRecipesDisplay = `<p>You're ready to cook!</p>`
-    //post to remove igr from our pantry when we click the button to cook it
-    //logic for disabling button to  buy ingred
-  } else {
-  const neededIngredients = user.returnNeededIngredients(selectedRecipe)
-    neededRecipesDisplay = neededIngredients.map(ingredient => {
-      return `<p>${ingredient}</p>`
-    }).join("")
-    //forEach ===> post call? buy ingrButton (cannot click the button to cook until then; once bought then it can be selected to cook )
-    //run return needed ingred method
-    //returns array of needed ingr
-  }
-
   recipeView.innerHTML = `
     <div>
       <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
@@ -225,9 +217,14 @@ function showRecipeCard(selectedRecipe) {
       }>${
     inRecipesToCook ? "Already in List" : "Add to Recipes to Cook"
   }</button>
-    <button class="cook-recipe-button" ${user.checkPantry(selectedRecipe) ? "" : "disabled"}>Cook Recipe </button>
-    <button class="buy-ingredients-button" ${user.checkPantry(selectedRecipe) ? "disabled" : ""}>Buy Ingredients </button>
+    <button class="cook-recipe-button" ${
+      user.checkPantry(selectedRecipe) ? "" : "disabled"
+    }>Cook Recipe </button>
+    <button class="buy-ingredients-button" ${
+      user.checkPantry(selectedRecipe) ? "disabled" : ""
+    }>Buy Ingredients </button>
     </div>
+
     <section class="recipe-info">
       <div>
         <h1 class="recipe-title">${selectedRecipe.name}</h1>
@@ -258,6 +255,99 @@ function showRecipeCard(selectedRecipe) {
           .join("")}
       </div>
       </section>`;
+  const lhsDiv = document.createElement("div");
+  const lhsImg = document.createElement("img");
+  lhsImg.classList.add("recipe-image");
+  lhsImg.src = selectedRecipe.image;
+  lhsImg.alt = selectedRecipe.name;
+  lhsDiv.appendChild(lhsImg);
+
+  const favoriteButton = document.createElement("button");
+  favoriteButton.classList.add("favorite-button");
+  favoriteButton.innerText = isFavorite ? "Unfavorite" : "Favorite";
+  lhsDiv.appendChild(favoriteButton);
+
+  const addToRecipesToCookButton = document.createElement("button");
+  addToRecipesToCookButton.classList.add("add-to-recipes-to-cook-button");
+  addToRecipesToCookButton.innerText = inRecipesToCook
+    ? "Already in List"
+    : "Add to Recipes to Cook";
+  lhsDiv.appendChild(addToRecipesToCookButton);
+}
+// REPLACE WITH DOMUPDATES
+function showRecipeCard(selectedRecipe) {
+  const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
+  const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
+  let neededRecipesDisplay = "";
+  //for DOMUPDATES: the thing that changes the paragraph tag that changes if we have the ingr or not
+  if (user.checkPantry(selectedRecipe)) {
+    neededRecipesDisplay = `<p>You're ready to cook!</p>`;
+    //post to remove igr from our pantry when we click the button to cook it
+    //logic for disabling button to  buy ingred
+  } else {
+    const neededIngredients = user.returnNeededIngredients(selectedRecipe);
+    neededRecipesDisplay = neededIngredients
+      .map((ingredient) => {
+        return `<p>${ingredient}</p>`;
+      })
+      .join("");
+    //forEach ===> post call? buy ingrButton (cannot click the button to cook until then; once bought then it can be selected to cook )
+    //run return needed ingred method
+    //returns array of needed ingr
+  }
+
+  recipeView.innerHTML = `
+    <div>
+      <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
+    selectedRecipe.name
+  }">
+      <button class="favorite-button">${
+        isFavorite ? "Unf" : "F"
+      }avorite</button>
+      <button class="add-to-recipes-to-cook-button" ${
+        inRecipesToCook ? "disabled" : ""
+      }>${
+    inRecipesToCook ? "Already in List" : "Add to Recipes to Cook"
+  }</button>
+    <button class="cook-recipe-button" ${
+      user.checkPantry(selectedRecipe) ? "" : "disabled"
+    }>Cook Recipe </button>
+    <button class="buy-ingredients-button" ${
+      user.checkPantry(selectedRecipe) ? "disabled" : ""
+    }>Buy Ingredients </button>
+    </div>
+
+    <section class="recipe-info">
+      <div>
+        <h1 class="recipe-title">${selectedRecipe.name}</h1>
+      </div>
+      <div>
+      <h1 class="">Ingredients</h1>
+      <ul>
+      ${selectedRecipe.ingredients
+        .map(({ name, amount, unit }) => {
+          return `<li>${amount} ${unit} ${name}</li>`;
+        })
+        .join("")}
+      </ul>
+      </div>
+      <div>
+        <h3>Total Cost of Ingredients: $${(
+          selectedRecipe.getCostOfIngredients() / 100
+        ).toFixed(2)}</h3>
+      </div>
+      <div class="needed-ingredients"> ${neededRecipesDisplay}
+      </div>
+      <div>
+        <h1 class="">Recipe Instructions</h1>
+        ${selectedRecipe.instructions
+          .map(({ number, instruction }) => {
+            return `<p>${number}. ${instruction}</p>`;
+          })
+          .join("")}
+      </div>
+      </section>`;
+
   document.querySelectorAll(".favorite-button").forEach((button) => {
     button.addEventListener("click", () => {
       clickFavoriteButton(selectedRecipe)();
