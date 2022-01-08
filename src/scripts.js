@@ -9,7 +9,7 @@ import {
   fetchUsers,
   fetchIngredients,
   fetchRecipes,
-  buyIngredients,
+  updateIngredients,
 } from "./apiCalls.js";
 import domUpdates from "./domUpdates.js";
 
@@ -323,6 +323,11 @@ function buyOurIngredients(recipe) {
   user.buyMissingIngredients(neededIngs);
   console.log(user.pantry);
   showRecipeCard(recipe);
+  neededIngs.forEach((ingredient) => {
+    updateIngredients(user.id, ingredient.id, ingredient.difference).then(
+      (result) => console.log(result)
+    );
+  });
 }
 
 // REPLACE WITH DOMUPDATES
