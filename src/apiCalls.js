@@ -16,11 +16,15 @@ export const fetchRecipes = () => {
     .catch((error) => console.log(error));
 };
 
-//POST request 
+//POST request
 
-export const buyIngredients = (userID, ingredientID, ingredientModification) => {
+export const updateIngredients = (
+  userID,
+  ingredientID,
+  ingredientModification
+) => {
   return fetch("http://localhost:3001/api/v1/users", {
-    method: 'POST',
+    method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -28,7 +32,7 @@ export const buyIngredients = (userID, ingredientID, ingredientModification) => 
     body: JSON.stringify({
       userID: userID,
       ingredientID: ingredientID,
-      ingredientModification: ingredientModification
+      ingredientModification: ingredientModification,
     }),
   })
     .then((response) => response.json())

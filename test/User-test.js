@@ -100,7 +100,6 @@ describe("User", () => {
     expect(user1.getFirstName()).to.equal("Saige");
   });
 
-
   it("should have an id", () => {
     expect(user1.id).to.equal(1);
   });
@@ -111,7 +110,6 @@ describe("User", () => {
       { ingredient: 1082047, amount: 15 },
       { ingredient: 20081, amount: 15 },
       { ingredient: 18372, amount: 15 },
-
     ]);
     expect(user2.pantry).to.deep.equal(undefined);
   });
@@ -172,12 +170,12 @@ describe("User", () => {
     ]);
   });
 
-it("should compare ingredients in recipe with with ingedients in user pantry", () => {
-  expect(user1.checkPantry(recipe1)).to.equal(true)
-});
+  it("should compare ingredients in recipe with with ingedients in user pantry", () => {
+    expect(user1.checkPantry(recipe1)).to.equal(true);
+  });
 
-it("should return missing ingredients for a recipe", () => {
-  expect(user1.returnNeededIngredients(recipe1)).to.deep.equal([])
-})
-
+  it("should return missing ingredients for a recipe", () => {
+    expect(user1.returnNeededIngredients(recipe1)).to.deep.equal([]);
+  });
+  // Add test to show missing ingredients
 });
