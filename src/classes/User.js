@@ -59,39 +59,29 @@ class User {
   }
 
   checkPantry(recipe) {
-    const comparedIngredients = [];
-    recipe.ingredients.forEach((recipeIngredient) => {
-      this.pantry.forEach((userPantryIngredient) => {
-        if (
-          recipeIngredient.id === userPantryIngredient.ingredient &&
-          userPantryIngredient.amount >= recipeIngredient.amount
-        ) {
-          comparedIngredients.push(recipeIngredient.id);
-        }
-      });
-    });
-    return recipe.ingredients.length === comparedIngredients.length;
+    return this.returnNeededIngredients(recipe).length === 0;
   }
 
   returnNeededIngredients(recipe) {
     const result = recipe.ingredients.reduce(
       (neededIngredients, recipeIngredient) => {
+        console.log(recipeIngredient);
         const inc = this.pantry.find((ingredient) => {
-          return recipeIngredient.id === ingredient;
+          return recipeIngredient.id === ingredient.ingredient;
         });
         if (!inc) {
           neededIngredients.push({
             id: recipeIngredient.id,
             name: recipeIngredient.name,
             difference: recipeIngredient.amount,
-            unit: recipeIngredient.quantity.unit,
+            unit: recipeIngredient.unit,
           });
-        } else if (inc && recipeIngredient.amount > this.pantry.amount) {
+        } else if (inc && recipeIngredient.amount > inc.amount) {
           neededIngredients.push({
             id: recipeIngredient.id,
             name: recipeIngredient.name,
-            difference: recipeIngredient.amount - this.pantry.amount,
-            unit: recipeIngredient.quantity.unit,
+            difference: recipeIngredient.amount - inc.amount,
+            unit: recipeIngredient.unit,
           });
         }
         return neededIngredients;

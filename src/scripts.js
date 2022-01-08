@@ -234,16 +234,21 @@ function createRecipeInfoSection(selectedRecipe) {
 
   const neededIngredientsDiv = document.createElement("div");
   neededIngredientsDiv.classList.add("needed-ingredients");
+  const missingIngredientsHeader = document.createElement("h3");
+  missingIngredientsHeader.innerText = "Missing Ingredients:";
+  neededIngredientsDiv.appendChild(missingIngredientsHeader);
   if (user.checkPantry(selectedRecipe)) {
     const p = document.createElement("p");
     p.innerText = "You're ready to cook!";
     neededIngredientsDiv.appendChild(p);
   } else {
-    // user.returnNeededIngredients(selectedRecipe).forEach((ingredient) => {
-    //   const p = document.createElement("p");
-    //   p.innerText = `${ingredient}`;
-    //   neededIngredientsDiv.appendChild(p);
-    // });
+    const missingList = document.createElement("ul");
+    user.returnNeededIngredients(selectedRecipe).forEach((ingredient) => {
+      const li = document.createElement("li");
+      li.innerText = `${ingredient.difference} ${ingredient.unit} ${ingredient.name}`;
+      missingList.appendChild(li);
+    });
+    neededIngredientsDiv.appendChild(missingList);
   }
   section.appendChild(neededIngredientsDiv);
 
@@ -288,14 +293,14 @@ function createRecipeCard(selectedRecipe) {
   const cookButton = createButton(
     ["cook-recipe-button"],
     "Cook Recipe",
-    user.checkPantry(selectedRecipe)
+    !user.checkPantry(selectedRecipe)
   );
   lhsDiv.appendChild(cookButton);
 
   const buyIngButton = createButton(
     ["buy-ingredients-button"],
     "Buy Ingredients",
-    !user.checkPantry(selectedRecipe)
+    user.checkPantry(selectedRecipe)
   );
   lhsDiv.appendChild(buyIngButton);
 
@@ -305,77 +310,7 @@ function createRecipeCard(selectedRecipe) {
 // REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {
   createRecipeCard(selectedRecipe);
-  // const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
-  // const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
-  // let neededRecipesDisplay = "";
-  // //for DOMUPDATES: the thing that changes the paragraph tag that changes if we have the ingr or not
-  // if (user.checkPantry(selectedRecipe)) {
-  //   neededRecipesDisplay = `<p>You're ready to cook!</p>`;
-  //   //post to remove igr from our pantry when we click the button to cook it
-  //   //logic for disabling button to  buy ingred
-  // } else {
-  //   const neededIngredients = user.returnNeededIngredients(selectedRecipe);
-  //   neededRecipesDisplay = neededIngredients
-  //     .map((ingredient) => {
-  //       return `<p>${ingredient}</p>`;
-  //     })
-  //     .join("");
-  //   //forEach ===> post call? buy ingrButton (cannot click the button to cook until then; once bought then it can be selected to cook )
-  //   //run return needed ingred method
-  //   //returns array of needed ingr
-  // }
-
-  // recipeView.innerHTML = `
-  //   <div>
-  //     <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
-  //   selectedRecipe.name
-  // }">
-  //     <button class="favorite-button">${
-  //       isFavorite ? "Unf" : "F"
-  //     }avorite</button>
-  //     <button class="add-to-recipes-to-cook-button" ${
-  //       inRecipesToCook ? "disabled" : ""
-  //     }>${
-  //   inRecipesToCook ? "Already in List" : "Add to Recipes to Cook"
-  // }</button>
-  //   <button class="cook-recipe-button" ${
-  //     user.checkPantry(selectedRecipe) ? "" : "disabled"
-  //   }>Cook Recipe </button>
-  //   <button class="buy-ingredients-button" ${
-  //     user.checkPantry(selectedRecipe) ? "disabled" : ""
-  //   }>Buy Ingredients </button>
-  //   </div>
-
-  //   <section class="recipe-info">
-  //     <div>
-  //       <h1 class="recipe-title">${selectedRecipe.name}</h1>
-  //     </div>
-  //     <div>
-  //     <h1 class="">Ingredients</h1>
-  //     <ul>
-  //     ${selectedRecipe.ingredients
-  //       .map(({ name, amount, unit }) => {
-  //         return `<li>${amount} ${unit} ${name}</li>`;
-  //       })
-  //       .join("")}
-  //     </ul>
-  //     </div>
-  //     <div>
-  //       <h3>Total Cost of Ingredients: $${(
-  //         selectedRecipe.getCostOfIngredients() / 100
-  //       ).toFixed(2)}</h3>
-  //     </div>
-  //     <div class="needed-ingredients"> ${neededRecipesDisplay}
-  //     </div>
-  //     <div>
-  //       <h1 class="">Recipe Instructions</h1>
-  //       ${selectedRecipe.instructions
-  //         .map(({ number, instruction }) => {
-  //           return `<p>${number}. ${instruction}</p>`;
-  //         })
-  //         .join("")}
-  //     </div>
-  //     </section>`;
+  console.log(user.pantry);
 
   document.querySelectorAll(".favorite-button").forEach((button) => {
     button.addEventListener("click", () => {
