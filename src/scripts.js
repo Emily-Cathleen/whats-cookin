@@ -197,6 +197,19 @@ function showRecipeCard(selectedRecipe) {
   const isFavorite = user.favoriteRecipes.includes(selectedRecipe);
   const inRecipesToCook = user.recipesToCook.includes(selectedRecipe);
 
+      //for DOMUPDATES: the thing that changes the paragraph tag that changes if we have the ingr or not
+  if(checkPantry(selectedRecipe)){
+
+    //post to remove igr from our pantry when we click the button to cook it
+    //logic for disabling button to  buy ingred
+  } else {
+  const neededIngredients = returnNeededIngredients(selectedRecipe)
+
+    //forEach ===> post call? buy ingrButton (cannot click the button to cook until then; once bought then it can be selected to cook )
+    //run return needed ingred method
+    //returns array of needed ingr
+  }
+
   recipeView.innerHTML = `
     <div>
       <img class="recipe-image" id="" src="${selectedRecipe.image}" alt="${
@@ -210,6 +223,8 @@ function showRecipeCard(selectedRecipe) {
       }>${
     inRecipesToCook ? "Already in List" : "Add to Recipes to Cook"
   }</button>
+    <button class="cook-recipe-button">Cook Recipe </button>
+    <button class="buy-ingredients-button">Buy Ingredients </button>
     </div>
     <section class="recipe-info">
       <div>
