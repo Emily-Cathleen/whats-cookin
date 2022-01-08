@@ -5,7 +5,12 @@ import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
 import User from "./classes/User.js";
-import { fetchUsers, fetchIngredients, fetchRecipes } from "./apiCalls.js";
+import {
+  fetchUsers,
+  fetchIngredients,
+  fetchRecipes,
+  buyIngredients,
+} from "./apiCalls.js";
 import domUpdates from "./domUpdates.js";
 
 /* QUERY SELECTORS */
@@ -306,11 +311,23 @@ function createRecipeCard(selectedRecipe) {
 
   recipeView.appendChild(lhsDiv);
   recipeView.appendChild(createRecipeInfoSection(selectedRecipe));
+
+  buyIngButton.addEventListener("click", () => {
+    buyOurIngredients(selectedRecipe);
+  });
 }
+
+function buyOurIngredients(recipe) {
+  console.log(user.pantry);
+  const neededIngs = user.returnNeededIngredients(recipe);
+  user.buyMissingIngredients(neededIngs);
+  console.log(user.pantry);
+  showRecipeCard(recipe);
+}
+
 // REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {
   createRecipeCard(selectedRecipe);
-  console.log(user.pantry);
 
   document.querySelectorAll(".favorite-button").forEach((button) => {
     button.addEventListener("click", () => {

@@ -65,7 +65,6 @@ class User {
   returnNeededIngredients(recipe) {
     const result = recipe.ingredients.reduce(
       (neededIngredients, recipeIngredient) => {
-        console.log(recipeIngredient);
         const inc = this.pantry.find((ingredient) => {
           return recipeIngredient.id === ingredient.ingredient;
         });
@@ -90,6 +89,22 @@ class User {
     );
     this.neededIngredients = result;
     return result;
+  }
+
+  buyMissingIngredients(neededIngredients) {
+    neededIngredients.forEach((ingredient) => {
+      const pantryIng = this.pantry.find(
+        (pantryIngredient) => pantryIngredient.ingredient === ingredient.id
+      );
+      if (!pantryIng) {
+        this.pantry.push({
+          ingredient: ingredient.id,
+          amount: ingredient.difference,
+        });
+      } else {
+        pantryIng.amount += ingredient.difference;
+      }
+    });
   }
 }
 
