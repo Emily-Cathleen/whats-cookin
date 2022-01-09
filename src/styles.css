@@ -112,13 +112,16 @@ html {
   cursor: pointer;
 }
 
-
 /* ~~~~ Recipe View ~~~~ */
 
-
-.recipe-view, {
+.pantry {
   display: flex;
-  background-color: #fbeb9ca6;;
+  border: 3px blue dashed;
+}
+
+.recipe-view {
+  display: flex;
+  background-color: #fbeb9ca6;
   margin: 30px 30px 30px 30px;
   border-radius: 1%;
 }

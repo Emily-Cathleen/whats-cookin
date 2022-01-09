@@ -1,13 +1,15 @@
 const Recipe = require("../classes/Recipe.js");
+const ingredients = require("../data/ingredients.js");
 
 class User {
-  constructor(userData) {
+  constructor(userData, ingredientsData) {
     this.name = userData.name;
     this.id = userData.id;
     this.pantry = userData.pantry;
     this.neededIngredients = [];
     this.favoriteRecipes = [];
     this.recipesToCook = [];
+    this.ingredientsData = ingredientsData;
   }
 
   getFirstName() {
@@ -62,6 +64,24 @@ class User {
     return this.returnNeededIngredients(recipe).length === 0;
   }
 
+  translateIngredients(pantry, ingredientsData) {
+    const result = pantry.ingredients.reduce(
+      (pantryIngredients, ingredient) => {
+        const inc = this.pantry.find((ingredient) => {
+          return ingredient.id === pantryIngredients.ingredient;
+        });
+        pantryIngredients.push({
+          id: ingredient.id,
+          name: ingredient.name,
+          amount: inc.amount,
+          unit: ingredient.unit,
+        });
+        return pantryIngredients;
+      },
+      []
+    );
+    return result;
+  }
   returnNeededIngredients(recipe) {
     const result = recipe.ingredients.reduce(
       (neededIngredients, recipeIngredient) => {

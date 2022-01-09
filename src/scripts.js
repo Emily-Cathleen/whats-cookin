@@ -309,6 +309,17 @@ function createRecipeCard(selectedRecipe) {
   );
   lhsDiv.appendChild(buyIngButton);
 
+  const lhsPantry = document.createElement("div");
+  lhsPantry.classList.add("pantry-div");
+  const pantryList = document.createElement("ul");
+  user.translateIngredients.forEach(({ amount, ingredient }) => {
+    let li = document.createElement("li");
+    li.innerText = `${amount} ${ingredient.name}`;
+    pantryList.appendChild(li);
+  });
+  lhsPantry.appendChild(pantryList);
+  lhsDiv.appendChild(lhsPantry);
+
   recipeView.appendChild(lhsDiv);
   recipeView.appendChild(createRecipeInfoSection(selectedRecipe));
 
