@@ -335,8 +335,8 @@ function buyOurIngredients(recipe) {
 }
 
 function cookOurRecipe(recipe) {
-  const usedIngs = user.returnNeededIngredients(recipe);
-  
+  user.subtractUsedIngredients(recipe)
+  console.log("are you working")
 }
 
 
