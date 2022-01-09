@@ -315,13 +315,17 @@ function createRecipeCard(selectedRecipe) {
   buyIngButton.addEventListener("click", () => {
     buyOurIngredients(selectedRecipe);
   });
+  cookButton.addEventListener('click', () => {
+    // eslint-disable-next-line no-undef
+    cookOurRecipe(selectedRecipe);
+  })
 }
 
 function buyOurIngredients(recipe) {
-  console.log(user.pantry);
+  // console.log(user.pantry);
   const neededIngs = user.returnNeededIngredients(recipe);
   user.buyMissingIngredients(neededIngs);
-  console.log(user.pantry);
+  // console.log(user.pantry);
   showRecipeCard(recipe);
   neededIngs.forEach((ingredient) => {
     updateIngredients(user.id, ingredient.id, ingredient.difference).then(
@@ -329,6 +333,12 @@ function buyOurIngredients(recipe) {
     );
   });
 }
+
+function cookOurRecipe(recipe) {
+  user.subtractUsedIngredients(recipe)
+  console.log("are you working")
+}
+
 
 // REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {

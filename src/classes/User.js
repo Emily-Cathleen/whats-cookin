@@ -106,6 +106,23 @@ class User {
       }
     });
   }
+
+  subtractUsedIngredients(recipe) {
+    recipe.ingredients.forEach((ingredient) => {
+      const pantryIng = this.pantry.find((pantryIngredient) => 
+         pantryIngredient.ingredient === ingredient.id
+      );
+      console.log("pantry ing", pantryIng)
+      pantryIng.amount -= ingredient.difference;
+      console.log("secondlog", pantryIng)
+    }); 
+    //removing from our pantry what was used when the recipe was cooked
+    //once it is cooked, the post removes it similar to how it was posted when we added recipes?
+    //update the pantry (subtracting) ---> ingredientModifications: -# (see post)
+    //we want to loop through each ingr in our recipe 
+    //then pull amount the recipe requires then see if that equals what is in the pantry 
+  }
 }
 
+ 
 module.exports = User;
