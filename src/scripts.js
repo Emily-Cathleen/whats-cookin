@@ -311,6 +311,9 @@ function createRecipeCard(selectedRecipe) {
 
   const lhsPantry = document.createElement("div");
   lhsPantry.classList.add("pantry-div");
+  const pantryHeader = document.createElement("h2");
+  pantryHeader.innerText = `${user.name}'s Pantry:`;
+  lhsPantry.appendChild(pantryHeader);
   const pantryList = document.createElement("ul");
   user.translateIngredients(ingredientsData).forEach(({ name, amount }) => {
     let li = document.createElement("li");
@@ -327,7 +330,6 @@ function createRecipeCard(selectedRecipe) {
     buyOurIngredients(selectedRecipe);
   });
   cookButton.addEventListener("click", () => {
-    // eslint-disable-next-line no-undef
     cookOurRecipe(selectedRecipe);
   });
 }
@@ -349,7 +351,7 @@ function cookOurRecipe(recipe) {
   user.subtractUsedIngredients(recipe);
   showRecipeCard(recipe);
   recipe.ingredients.forEach((ingredient) => {
-    updateIngredients(user.id, ingredient.id, ingredient.amount).then(
+    updateIngredients(user.id, ingredient.id, -ingredient.amount).then(
       (result) => console.log(result)
     );
   });
