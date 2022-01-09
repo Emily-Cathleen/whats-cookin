@@ -15,7 +15,6 @@ import domUpdates from "./domUpdates.js";
 
 /* QUERY SELECTORS */
 
-// const recipeTitle = document.querySelector("#openRecipe");
 const homePage = document.querySelector(".home-page");
 const recipeView = document.querySelector(".recipe-view");
 const homeButton = document.querySelector(".home-button");
@@ -23,15 +22,11 @@ const favoriteRecipesPageButton = document.querySelector(
   ".favorite-recipes-page-button"
 );
 const recipesToCookButton = document.querySelector(".recipes-to-cook-button");
-const recipeCard = document.querySelector(".recipe-card");
-// const filterBar = document.querySelector(".filter-bar");
 const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
-// const favoriteButtons = document.querySelectorAll(".favorite-button");
 const recipesToCookPage = document.querySelector(".recipes-to-cook-page");
-const userName = document.querySelector(".user-name");
 
 /* GLOBAL VARIABLES */
 const hidableElements = [
@@ -55,10 +50,8 @@ let randomUser;
 /* FUNCTIONS */
 // domUpdates.hide(elementsToDisplay);
 function displayElements(elementsToDisplay) {
-  elementsToDisplay.forEach(removeHidden);
-  hidableElements
-    .filter((element) => !elementsToDisplay.includes(element))
-    .forEach(addHidden);
+  domUpdates.show(...elementsToDisplay);
+  domUpdates.hide(...hidableElements.filter((element) => !elementsToDisplay.includes(element)))
 }
 
 function loadAPIs() {
