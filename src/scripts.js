@@ -312,9 +312,9 @@ function createRecipeCard(selectedRecipe) {
   const lhsPantry = document.createElement("div");
   lhsPantry.classList.add("pantry-div");
   const pantryList = document.createElement("ul");
-  user.translateIngredients.forEach(({ amount, ingredient }) => {
+  user.translateIngredients(ingredientsData).forEach(({ name, amount }) => {
     let li = document.createElement("li");
-    li.innerText = `${amount} ${ingredient.name}`;
+    li.innerText = `${amount} ${name}`;
     pantryList.appendChild(li);
   });
   lhsPantry.appendChild(pantryList);

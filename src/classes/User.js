@@ -64,24 +64,16 @@ class User {
     return this.returnNeededIngredients(recipe).length === 0;
   }
 
-  translateIngredients(pantry, ingredientsData) {
-    const result = pantry.ingredients.reduce(
-      (pantryIngredients, ingredient) => {
-        const inc = this.pantry.find((ingredient) => {
-          return ingredient.id === pantryIngredients.ingredient;
-        });
-        pantryIngredients.push({
-          id: ingredient.id,
-          name: ingredient.name,
-          amount: inc.amount,
-          unit: ingredient.unit,
-        });
-        return pantryIngredients;
-      },
-      []
-    );
-    return result;
+  translateIngredients(ingredientsData) {
+    const translatedIngredients = this.pantry.map((ingredient) => {
+      const id = ingredient.ingredient;
+      const name = ingredientsData.find((ingEntry) => ingEntry.id === id).name;
+      const amount = ingredient.amount;
+      return { id: id, name: name, amount: amount };
+    });
+    return translatedIngredients;
   }
+
   returnNeededIngredients(recipe) {
     const result = recipe.ingredients.reduce(
       (neededIngredients, recipeIngredient) => {
