@@ -309,16 +309,27 @@ function createRecipeCard(selectedRecipe) {
   );
   lhsDiv.appendChild(buyIngButton);
 
+  const lhsPantry = document.createElement("div");
+  lhsPantry.classList.add("pantry-div");
+  const pantryList = document.createElement("ul");
+  user.translateIngredients.forEach(({ amount, ingredient }) => {
+    let li = document.createElement("li");
+    li.innerText = `${amount} ${ingredient.name}`;
+    pantryList.appendChild(li);
+  });
+  lhsPantry.appendChild(pantryList);
+  lhsDiv.appendChild(lhsPantry);
+
   recipeView.appendChild(lhsDiv);
   recipeView.appendChild(createRecipeInfoSection(selectedRecipe));
 
   buyIngButton.addEventListener("click", () => {
     buyOurIngredients(selectedRecipe);
   });
-  cookButton.addEventListener('click', () => {
+  cookButton.addEventListener("click", () => {
     // eslint-disable-next-line no-undef
     cookOurRecipe(selectedRecipe);
-  })
+  });
 }
 
 function buyOurIngredients(recipe) {
@@ -335,10 +346,14 @@ function buyOurIngredients(recipe) {
 }
 
 function cookOurRecipe(recipe) {
-  user.subtractUsedIngredients(recipe)
-  console.log("are you working")
+  user.subtractUsedIngredients(recipe);
+  showRecipeCard(recipe);
+  recipe.ingredients.forEach((ingredient) => {
+    updateIngredients(user.id, ingredient.id, ingredient.amount).then(
+      (result) => console.log(result)
+    );
+  });
 }
-
 
 // REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {
