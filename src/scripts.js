@@ -20,13 +20,11 @@ const favoriteRecipesPageButton = document.querySelector(
   ".favorite-recipes-page-button"
 );
 const recipesToCookButton = document.querySelector(".recipes-to-cook-button");
-const recipeCard = document.querySelector(".recipe-card");
 const nameSearchInput = document.querySelector("#nameSearchInput");
 const ingredientSearchInput = document.querySelector("#ingredientSearchInput");
 const tagsDropDown = document.querySelector("#tags");
 const favoriteRecipePage = document.querySelector(".favorite-recipe-page");
 const recipesToCookPage = document.querySelector(".recipes-to-cook-page");
-const userName = document.querySelector(".user-name");
 
 /* GLOBAL VARIABLES */
 const hidableElements = [
@@ -39,7 +37,6 @@ const hidableElements = [
   recipesToCookButton,
 ];
 let user;
-let ingredients;
 let recipes;
 let cookbook;
 let usersData;
@@ -135,7 +132,6 @@ function filterByTags() {
   renderRecipePages();
 }
 function displayRecipeView(selectedRecipe) {
-  // domUpdates.show(recipeView, homeButton, favoriteRecipesPageButton, recipesToCookButton)
   displayElements([
     recipeView,
     homeButton,

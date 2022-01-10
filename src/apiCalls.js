@@ -1,3 +1,4 @@
+//FETCH calls
 export const fetchUsers = () => {
   return fetch("http://localhost:3001/api/v1/users")
     .then((response) => response.json())
@@ -17,7 +18,6 @@ export const fetchRecipes = () => {
 };
 
 //POST request
-
 export const updateIngredients = (
   userID,
   ingredientID,
