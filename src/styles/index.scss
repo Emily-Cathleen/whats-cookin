@@ -10,7 +10,6 @@ body {
   background-repeat: no-repeat;
   background-size: 100%;
   margin: 20px 20px 20px 20px;
-  border: 2px solid #050407;
   font-family: Georgia, Times, serif;
 }
 
@@ -20,13 +19,6 @@ html {
 }
 
 /* ~~~~~ Nav Bar ~~~~~ */
-
-// .nav-bar {
-//   display: flex;
-//   flex-direction: column;
-//   background-image: url("https://images.pexels.com/photos/4261733/pexels-photo-4261733.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-//   background-size: cover;
-// }
 
 .nav-bar {
   @include flex(column, nowrap, normal, normal, normal);
@@ -134,7 +126,9 @@ html {
 }
 
 .favorite-button,
-.add-to-recipes-to-cook-button {
+.add-to-recipes-to-cook-button,
+.cook-recipe-button,
+.buy-ingredients-button {
   flex-direction: row;
   text-align: center;
   padding: 15px 32px;
@@ -156,6 +150,10 @@ html {
 .favorite-recipe-page {
   display: flex;
   flex-direction: column;
+}
+
+.pantry-div {
+  background: #fcf2c09c;
 }
 
 .hidden {
