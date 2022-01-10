@@ -46,10 +46,8 @@ let randomUser;
 
 /* FUNCTIONS */
 function displayElements(elementsToDisplay) {
-  elementsToDisplay.forEach(removeHidden);
-  hidableElements
-    .filter((element) => !elementsToDisplay.includes(element))
-    .forEach(addHidden);
+  domUpdates.show(...elementsToDisplay);
+  domUpdates.hide(...hidableElements.filter((element) => !elementsToDisplay.includes(element)))
 }
 
 function loadAPIs() {

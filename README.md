@@ -1,6 +1,6 @@
 # 🍝  What's Cookin'? 🧑‍🍳 
 
-This application was created as a paired project for the Turing School of Software & Design.
+This application was created as a group project for the Turing School of Software & Design.
 
 ## Abstract
 
@@ -27,6 +27,10 @@ The user has the ability to search for meals by ingredient, recipe name, or tags
 
 ![](https://media.giphy.com/media/mR3rPp1FSuVU5btjqD/giphy.gif)
 
+## Pantry Functionality 
+
+Upon clicking on a recipe, the user will be taken to a view of the recipe card, to see if their pantry has the needed ingredients and amounts for their recipes. Additionally, on the recipe card, a user can see the entire contents of the pantry available to them. If the user is missing ingredients, they can opt to purchase the ingredients and cook the recipe. This functionality is created through the use of fetching and posting to our local server APIs. 
+
 ## Installation and Setup:
 **To navigate the website live, a server download is required.**
  1. In your command line, `cd` into your local directory and clone down this repository -<br>
@@ -36,13 +40,15 @@ The user has the ability to search for meals by ingredient, recipe name, or tags
  3. Run the command `npm start` 
  4. With both the server running and this package, and visit `http://localhost:8080/` in your web browser.
 
-## Program Languages
+## Code Architecture 
 * JavaScript
 * HTML
 * CSS
 * Mocha
 * Chai
 * Node.js
+* Atom
+* VS Code
 
 ## Architecture & Planning
 
@@ -52,5 +58,5 @@ We utilized github projects to manage the workflow of this application, that boa
 ## Project Members
 This project was completed at the Turing School of Software & Design. Functionality and design by
 * [Susanna Carey](https://github.com/susannaopal)
-* [Rana J](https://github.com/rjur11)
+* [Rana Jurjus](https://github.com/rjur11)
 * [Emily Corcoran](https://github.com/Emily-Cathleen)
