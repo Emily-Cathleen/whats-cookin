@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import "./styles/index.scss";
-// import "./styles.css";
 import Ingredient from "./classes/Ingredient.js";
 import Cookbook from "./classes/Cookbook.js";
 import Recipe from "./classes/Recipe.js";
@@ -14,7 +13,6 @@ import {
 import domUpdates from "./domUpdates.js";
 
 /* QUERY SELECTORS */
-
 const homePage = document.querySelector(".home-page");
 const recipeView = document.querySelector(".recipe-view");
 const homeButton = document.querySelector(".home-button");
@@ -39,7 +37,6 @@ const hidableElements = [
   recipesToCookButton,
 ];
 let user;
-let ingredients;
 let recipes;
 let cookbook;
 let usersData;
@@ -48,7 +45,6 @@ let recipesData;
 let randomUser;
 
 /* FUNCTIONS */
-// domUpdates.hide(elementsToDisplay);
 function displayElements(elementsToDisplay) {
   domUpdates.show(...elementsToDisplay);
   domUpdates.hide(...hidableElements.filter((element) => !elementsToDisplay.includes(element)))
@@ -82,7 +78,6 @@ function loadAPIs() {
         }
       );
       cookbook = new Cookbook(recipes);
-      // REPLACE WITH DOMUPDATES
       renderRecipePages();
     }
   );
@@ -95,7 +90,6 @@ function getCookbookRecipes() {
     return cookbook.filteredRecipes(ingredientInput, nameInput);
   } else if (tagsDropDown.value !== "none") {
     const tagInput = tagsDropDown.value;
-    //written this way in case we want to try multiple tags at once in future. Should still work with dropdown
     return cookbook.filterTags(tagInput.split(",").map((tag) => tag.trim()));
   } else {
     return cookbook.recipes;
@@ -136,7 +130,6 @@ function filterByTags() {
   renderRecipePages();
 }
 function displayRecipeView(selectedRecipe) {
-  // domUpdates.show(recipeView, homeButton, favoriteRecipesPageButton, recipesToCookButton)
   displayElements([
     recipeView,
     homeButton,
@@ -150,7 +143,7 @@ function returnHome() {
   displayElements([homePage, favoriteRecipesPageButton, recipesToCookButton]);
   renderRecipePages();
 }
-// REPLACE WITH DOMUPDATES
+
 function populateRecipes(element, getRecipes) {
   const recipes = getRecipes();
   element.innerHTML = recipes
@@ -159,15 +152,15 @@ function populateRecipes(element, getRecipes) {
       return `
       <article class="recipe-card recipe-title" data-recipe-id='${recipe.id}'>
         <img class="recipe-image" data-recipe-id='${recipe.id}' src="${
-        recipe.image
-      }" alt="Image of ${recipe.name}" width=400>
+  recipe.image
+}" alt="Image of ${recipe.name}" width=400>
         <h1 class="recipe-title" data-recipe-id="${recipe.id}">${
-        recipe.name
-      }</h1>
+  recipe.name
+}</h1>
         <div>
           <button class="fav-button-${recipe.id}">${
-        isFavorite ? "Remove from " : "Add to "
-      }Favorites</button>
+  isFavorite ? "Remove from " : "Add to "
+}Favorites</button>
           <p data-recipe-id="${recipe.id}">Tags: ${recipe.tags.join(", ")}</p>
         </div>
       </article>`;
@@ -328,10 +321,8 @@ function createRecipeCard(selectedRecipe) {
 }
 
 function buyOurIngredients(recipe) {
-  // console.log(user.pantry);
   const neededIngs = user.returnNeededIngredients(recipe);
   user.buyMissingIngredients(neededIngs);
-  // console.log(user.pantry);
   showRecipeCard(recipe);
   neededIngs.forEach((ingredient) => {
     updateIngredients(user.id, ingredient.id, ingredient.difference).then(
@@ -350,7 +341,6 @@ function cookOurRecipe(recipe) {
   });
 }
 
-// REPLACE WITH DOMUPDATES
 function showRecipeCard(selectedRecipe) {
   createRecipeCard(selectedRecipe);
 
@@ -365,18 +355,16 @@ function showRecipeCard(selectedRecipe) {
     .querySelector(".add-to-recipes-to-cook-button")
     .addEventListener("click", () => {
       user.addRecipesToCook(selectedRecipe);
-      // REPLACE WITH DOMUPDATES
       renderRecipePages();
       showRecipeCard(selectedRecipe);
     });
 }
-// REPLACE WITH DOMUPDATES?
+
 function showFavoritesPage() {
   displayElements([favoriteRecipePage, homeButton, recipesToCookButton]);
   renderRecipePages();
 }
 
-// REPLACE WITH DOMUPDATES?
 function showRecipesToCookPage() {
   displayElements([recipesToCookPage, homeButton, favoriteRecipesPageButton]);
   renderRecipePages();

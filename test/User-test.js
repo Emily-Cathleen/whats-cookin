@@ -1,5 +1,4 @@
 import { expect } from "chai";
-import Cookbook from "../src/classes/Cookbook.js";
 const Recipe = require("../src/classes/Recipe.js");
 const Ingredient = require("../src/classes/Ingredient.js");
 const User = require("../src/classes/User.js");
@@ -12,7 +11,6 @@ describe("User", () => {
   let ingredient3;
   let recipe1;
   let recipe2;
-  let recipe3;
 
   beforeEach(() => {
     user1 = new User({
@@ -177,6 +175,4 @@ describe("User", () => {
   it("should return missing ingredients for a recipe", () => {
     expect(user1.returnNeededIngredients(recipe1)).to.deep.equal([]);
   });
-  // Add test to show missing ingredients
-  //Add test to show cooked/used ingredients 
 });

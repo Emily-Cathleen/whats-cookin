@@ -1,6 +1,3 @@
-const Recipe = require("../classes/Recipe.js");
-const ingredients = require("../data/ingredients.js");
-
 class User {
   constructor(userData, ingredientsData) {
     this.name = userData.name;
@@ -136,4 +133,4 @@ class User {
   }
 }
 
-module.exports = User;
+export default User;
